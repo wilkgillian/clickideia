@@ -3,25 +3,37 @@ import { BsPlayCircle } from 'react-icons/bs';
 
 interface DestakProps {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   genre: string;
+  movie_banner: string;
 }
 
-export default function Destak({ title, subtitle, genre }: DestakProps) {
+export default function Destak({
+  title,
+  subtitle,
+  genre,
+  movie_banner
+}: DestakProps) {
   return (
     <Box display="flex" w="100%" p={10}>
       <Box
         w="100%"
         mt={10}
         borderRadius={20}
-        backgroundImage="url('/assets/Mask.png')"
+        backgroundImage={`url(${movie_banner})`}
         backgroundPosition="top center"
         backgroundRepeat="no-repeat"
         backgroundSize="100%"
-        alignItems="center"
-        justifyContent="center"
       >
-        <Box w="100%" h="auto">
+        <Box
+          w="100%"
+          h="auto"
+          display="flex"
+          alignItems="left"
+          textAlign="left"
+          bgGradient="linear(to-r, #000, transparent)"
+          borderRadius="inherit"
+        >
           <VStack ml={5} alignItems="left" p={9}>
             <Text fontSize={16} textTransform="uppercase">
               Destaque
