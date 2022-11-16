@@ -24,7 +24,10 @@ export default function Home() {
       <Box>
         <CarouselDestak />
       </Box>
-      <Wrapper categories="ba babab" />
+      {/* <Box>
+      <CarouselCategories />  
+      </Box> */}
+      {/* <Wrapper categories="ba babab" /> */}
       {/* <CarouselCategories /> */}
     </Box>
   );
