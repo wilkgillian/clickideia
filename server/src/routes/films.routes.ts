@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
 import { Request, Response } from 'express';
-import CreateFilmService from '../CreateFilmsService';
 import { Film } from '../model/film';
 import { FilmRepository } from '../repositories/FilmsRepository';
 import { api } from '../services/api';
+import { CreateFilmService } from '../services/CreateFilmService';
 
 const filmsRoutes = Router();
 const filmRepository = new FilmRepository();
@@ -12,13 +12,9 @@ const filmRepository = new FilmRepository();
 filmsRoutes.post('/create', (req, res) => {
   const { title, description } = req.body;
 
-  const filmAlreadyExists = filmRepository.findByName(title);
+  const createFilmService = new CreateFilmService(filmRepository);
 
-  if (filmAlreadyExists) {
-    return res.status(400).json({ error: 'Filme já existe' });
-  }
-  const created_at = new Date();
-  filmRepository.create({ title, description, created_at });
+  createFilmService.execute({ title, description });
   return res.status(201).send();
 });
 

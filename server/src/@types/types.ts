@@ -1,3 +1,6 @@
+import { Film } from '../model/film';
+import { ICreateFilmDTO } from '../repositories/FilmsRepository';
+
 interface FilmProps {
   title: string;
   // original_title?: string;
@@ -17,10 +20,8 @@ interface FilmProps {
   // url?: number;
 }
 
-class CreateFilmService {
-  execute(props: FilmProps) {
-    console.log(props.title, props.description);
-  }
+export interface IFilmsRepository {
+  findByName(title: string): Film;
+  list(): Film[];
+  create({ title, description }: ICreateFilmDTO): void;
 }
-
-export default new CreateFilmService();

@@ -1,6 +1,6 @@
 import { Film } from '../model/film';
 
-interface ICreateFilmDTO {
+export interface ICreateFilmDTO {
   id?: string;
   title: string;
   created_at: Date;
