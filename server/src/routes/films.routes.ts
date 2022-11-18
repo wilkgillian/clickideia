@@ -1,37 +1,41 @@
-import { Router } from 'express';
+import { Router } from "express";
+import multer from "multer";
 
-import { Request, Response } from 'express';
-import { Film } from '../model/film';
-import { FilmRepository } from '../repositories/FilmsRepository';
-import { api } from '../services/api';
-import { CreateFilmService } from '../services/CreateFilmService';
+import { FilmRepository } from "../modules/films/repositories/implementations/FilmsRepository";
+import { api } from "../modules/films/services/api";
+import { createFilmController } from "../modules/films/useCases/createFilm";
+import { listFilmController } from "../modules/films/useCases/listFilm";
+import { uploadFilmController } from "../modules/films/useCases/uploadFilm";
 
 const filmsRoutes = Router();
-const filmRepository = new FilmRepository();
 
-filmsRoutes.post('/create', (req, res) => {
-  const { title, description } = req.body;
-
-  const createFilmService = new CreateFilmService(filmRepository);
-
-  createFilmService.execute({ title, description });
-  return res.status(201).send();
+const upload = multer({
+  dest: "./tmp",
 });
 
-filmsRoutes.get('/', (req, res) => {
-  const all = filmRepository.list();
-  return res.json(all);
+filmsRoutes.post("/create", (req, res) => {
+  return createFilmController.handle(req, res);
+});
+filmsRoutes.post("/upload", upload.single("file"), (req, res) => {
+  uploadFilmController.handle(req, res);
+});
+
+filmsRoutes.get("/", (req, res) => {
+  return listFilmController.handle(req, res);
+});
+
+filmsRoutes.get("/searchfilms", async (req, res) => {
+  try {
+    const { data } = await api.get("/films");
+    return res.send(data);
+  } catch {
+    return res.send({ message: "Falha ao obter dados" });
+  }
 });
 
 export { filmsRoutes };
 
 // export async function getAllFilms(req: Request, res: Response) {
-//   try {
-//     const { data } = await api.get('/films');
-//     return res.send(data);
-//   } catch {
-//     return res.send({ message: 'Falha ao obter dados' });
-//   }
 // }
 // export function getFilm(req: Request, res: Response) {
 //   if (req.body.id === '1') {

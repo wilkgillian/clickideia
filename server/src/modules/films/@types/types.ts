@@ -1,5 +1,4 @@
-import { Film } from '../model/film';
-import { ICreateFilmDTO } from '../repositories/FilmsRepository';
+
 
 interface FilmProps {
   title: string;
@@ -18,10 +17,4 @@ interface FilmProps {
   // locations?: number;
   // vehicles?: number;
   // url?: number;
-}
-
-export interface IFilmsRepository {
-  findByName(title: string): Film;
-  list(): Film[];
-  create({ title, description }: ICreateFilmDTO): void;
 }

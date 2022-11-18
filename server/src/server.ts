@@ -1,18 +1,14 @@
-import express from 'express';
-import {
-  createFilm,
-  deleteFilm,
-  filmsRoutes,
-  getAllFilms,
-  getFilm,
-  updateFilm
-} from './routes/films.routes';
-import { api } from './services/api';
+import express from "express";
+import { router } from "./routes";
+import { filmsRoutes } from "./routes/films.routes";
+import { specificationRoutes } from "./routes/specifications.routes";
 
 const app = express();
 app.use(express.json());
 
-app.use('/films', filmsRoutes);
+app.use(router);
+// app.use("/films", filmsRoutes);
+// app.use("/specifications", specificationRoutes);
 
 // app.get('/films', async (req, res) => {
 //   try {
@@ -30,4 +26,4 @@ app.use('/films', filmsRoutes);
 // app.delete('/deleteFilm', deleteFilm);
 // app.put('/updateFilm', updateFilm);
 
-app.listen(3333);
+app.listen(3333, () => console.log("Server is running"));

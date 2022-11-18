@@ -1,4 +1,4 @@
-import { Film } from '../model/film';
+import { Film } from "../../model/Film";
 
 export interface ICreateFilmDTO {
   id?: string;
@@ -23,8 +23,18 @@ export interface ICreateFilmDTO {
 
 class FilmRepository {
   private films: Film[];
-  constructor() {
+
+  private static INSTANCE: FilmRepository;
+
+  private constructor() {
     this.films = [];
+  }
+
+  public static getInstance(): FilmRepository {
+    if (!FilmRepository.INSTANCE) {
+      FilmRepository.INSTANCE = new FilmRepository();
+    }
+    return FilmRepository.INSTANCE;
   }
 
   create({ title, description }: ICreateFilmDTO): void {
@@ -36,7 +46,7 @@ class FilmRepository {
     return this.films;
   }
   findByName(film_title: string) {
-    const title = this.films.find(title => title.title === film_title);
+    const title = this.films.find((title) => title.title === film_title);
     return title;
   }
 }
