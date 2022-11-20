@@ -5,7 +5,7 @@ export interface ICreateFilmDTO {
   id?: string;
   title: string;
   created_at: Date;
-  // url_file: string;
+  url_file: string;
   // original_title?: string;
   // original_title_romanised?: string;
   // image: string;
@@ -39,14 +39,17 @@ class FilmRepository {
     return FilmRepository.INSTANCE;
   }
 
-  async create({ title, description }: ICreateFilmDTO): Promise<void> {
+  async create({
+    title,
+    description,
+    url_file
+  }: ICreateFilmDTO): Promise<void> {
     const film = new Film();
-    // const s3Storage = new S3Storage();
-    // const url_file = await s3Storage.saveFile(title);
     Object.assign(film, {
       title,
       description,
-      created_at: new Date()
+      created_at: new Date(),
+      url_file: url_file
     });
     this.films.push(film);
   }

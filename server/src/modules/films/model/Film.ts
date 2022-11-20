@@ -4,6 +4,7 @@ class Film {
   id?: string;
   title: string;
   created_at: Date;
+  url_file: string;
   // original_title?: string;
   // original_title_romanised?: string;
   // image: string;

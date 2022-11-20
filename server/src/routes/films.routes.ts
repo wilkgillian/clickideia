@@ -1,11 +1,9 @@
 import { Router } from 'express';
 import multer from 'multer';
 
-import { FilmRepository } from '../modules/films/repositories/implementations/FilmsRepository';
 import { api } from '../modules/films/services/api';
 import { createFilmController } from '../modules/films/useCases/createFilm';
 import { listFilmController } from '../modules/films/useCases/listFilm';
-import { uploadFilmController } from '../modules/films/useCases/uploadFilm';
 import uploadConfig from '../utils/multer';
 
 const filmsRoutes = Router();
@@ -14,15 +12,12 @@ const upload = multer(uploadConfig);
 
 filmsRoutes.post('/create', upload.single('file'), (req, res) => {
   // try{
-  //   uploadFilmController.handle(req, res);
+  // uploadFilmController.handle(req, res);
 
   // }catch(err){
   //   return new Error(err)
   // }
   return createFilmController.handle(req, res);
-});
-filmsRoutes.post('/upload', upload.single('file'), (req, res) => {
-  uploadFilmController.handle(req, res);
 });
 
 filmsRoutes.get('/', (req, res) => {
