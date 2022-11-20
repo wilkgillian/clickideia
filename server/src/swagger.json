@@ -1,0 +1,27 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Filimo documentation",
+    "description": "This is an API film",
+    "version": "1.0.0",
+    "contact": {
+      "email": "wilkrosa1998@gmail.com"
+    }
+  },
+  "paths": {
+    "/films": {
+      "get": {
+        "summary": "Atualizar os dados",
+        "description": "Atualiza os dados do banco de dados"
+      },
+      "responses": {
+        "201": {
+          "description": "Upload"
+        },
+        "500": {
+          "description": "Request error"
+        }
+      }
+    }
+  }
+}

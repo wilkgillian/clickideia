@@ -9,10 +9,10 @@ interface IRequest {
 class CreateFilmUseCase {
   constructor(private filmRepository: FilmRepository) {}
 
-  execute({ title, description, url_file }: IRequest): string {
+  execute({ title, description, url_file }: IRequest): void {
     const filmAlreadyExists = this.filmRepository.findByName(title);
     if (filmAlreadyExists) {
-      return 'Filme já existe';
+      throw new Error('Filme já existe');
     }
     const created_at = new Date();
     this.filmRepository.create({
