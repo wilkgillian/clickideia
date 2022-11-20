@@ -1,35 +1,40 @@
-import { Router } from "express";
-import multer from "multer";
+import { Router } from 'express';
+import multer from 'multer';
 
-import { FilmRepository } from "../modules/films/repositories/implementations/FilmsRepository";
-import { api } from "../modules/films/services/api";
-import { createFilmController } from "../modules/films/useCases/createFilm";
-import { listFilmController } from "../modules/films/useCases/listFilm";
-import { uploadFilmController } from "../modules/films/useCases/uploadFilm";
+import { FilmRepository } from '../modules/films/repositories/implementations/FilmsRepository';
+import { api } from '../modules/films/services/api';
+import { createFilmController } from '../modules/films/useCases/createFilm';
+import { listFilmController } from '../modules/films/useCases/listFilm';
+import { uploadFilmController } from '../modules/films/useCases/uploadFilm';
+import uploadConfig from '../utils/multer';
 
 const filmsRoutes = Router();
 
-const upload = multer({
-  dest: "./tmp",
-});
+const upload = multer(uploadConfig);
 
-filmsRoutes.post("/create", (req, res) => {
+filmsRoutes.post('/create', upload.single('file'), (req, res) => {
+  // try{
+  //   uploadFilmController.handle(req, res);
+
+  // }catch(err){
+  //   return new Error(err)
+  // }
   return createFilmController.handle(req, res);
 });
-filmsRoutes.post("/upload", upload.single("file"), (req, res) => {
+filmsRoutes.post('/upload', upload.single('file'), (req, res) => {
   uploadFilmController.handle(req, res);
 });
 
-filmsRoutes.get("/", (req, res) => {
+filmsRoutes.get('/', (req, res) => {
   return listFilmController.handle(req, res);
 });
 
-filmsRoutes.get("/searchfilms", async (req, res) => {
+filmsRoutes.get('/searchfilms', async (req, res) => {
   try {
-    const { data } = await api.get("/films");
+    const { data } = await api.get('/films');
     return res.send(data);
   } catch {
-    return res.send({ message: "Falha ao obter dados" });
+    return res.send({ message: 'Falha ao obter dados' });
   }
 });
 

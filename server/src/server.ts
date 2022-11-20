@@ -1,7 +1,6 @@
-import express from "express";
-import { router } from "./routes";
-import { filmsRoutes } from "./routes/films.routes";
-import { specificationRoutes } from "./routes/specifications.routes";
+import 'dotenv/config';
+import express from 'express';
+import { router } from './routes';
 
 const app = express();
 app.use(express.json());
@@ -26,4 +25,4 @@ app.use(router);
 // app.delete('/deleteFilm', deleteFilm);
 // app.put('/updateFilm', updateFilm);
 
-app.listen(3333, () => console.log("Server is running"));
+app.listen(3333, () => console.log('Server is running'));

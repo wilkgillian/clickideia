@@ -1,13 +1,14 @@
-import imageParser from "nodejs-image-parser";
-import fs from "fs";
+import imageParser from 'nodejs-image-parser';
+import fs from 'fs';
+import S3Storage from '../../../../utils/S3Storage';
 
 class UploadFilmUseCase {
-  execute(file: Express.Multer.File): void {
-    const stream = fs.createReadStream(file.path);
+  async execute(file: Express.Multer.File): Promise<void> {
+    const s3Storage = new S3Storage();
 
-    const parseFile = imageParser();
-
-    stream.pipe(parseFile);
+    const url_file = await s3Storage.saveFile(file.filename);
+    // const parseFile = imageParser();
+    // stream.pipe(parseFile);
   }
 }
 

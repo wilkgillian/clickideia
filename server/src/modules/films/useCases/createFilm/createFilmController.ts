@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { CreateFilmUseCase } from "./CreateFilmUseCase";
+import { Request, Response } from 'express';
+import { CreateFilmUseCase } from './CreateFilmUseCase';
 
 class CreateFilmController {
   constructor(private createFilmUseCase: CreateFilmUseCase) {}
