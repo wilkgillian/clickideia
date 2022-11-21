@@ -9,17 +9,35 @@
     }
   },
   "paths": {
-    "/films": {
+    "/films/searchFilms": {
       "get": {
         "summary": "Atualizar os dados",
-        "description": "Atualiza os dados do banco de dados"
-      },
-      "responses": {
-        "201": {
-          "description": "Upload"
-        },
-        "500": {
-          "description": "Request error"
+        "description": "Atualiza os dados do banco de dados",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Request error"
+          }
         }
       }
     }

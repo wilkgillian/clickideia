@@ -11,12 +11,6 @@ const filmsRoutes = Router();
 const upload = multer(uploadConfig);
 
 filmsRoutes.post('/create', upload.single('file'), (req, res) => {
-  // try{
-  // uploadFilmController.handle(req, res);
-
-  // }catch(err){
-  //   return new Error(err)
-  // }
   return createFilmController.handle(req, res);
 });
 
@@ -35,38 +29,3 @@ filmsRoutes.get('/searchfilms', async (req, res) => {
 
 export { filmsRoutes };
 
-// export async function getAllFilms(req: Request, res: Response) {
-// }
-// export function getFilm(req: Request, res: Response) {
-//   if (req.body.id === '1') {
-//     return res.send({ message: 'encontrado' });
-//   }
-// }
-// export function createFilm(req: Request, res: Response) {
-//   const data = req.body;
-//   const infos = {
-//     title: 'filme bom',
-//     description: 'Filme bom demais'
-//   };
-//   CreateFilmService.execute(infos);
-
-//   return res.send({ data });
-// }
-// export function updateFilm(req: Request, res: Response) {
-//   const infos = {
-//     title: 'filme bom',
-//     description: 'Filme bom demais'
-//   };
-//   CreateFilmService.execute(infos);
-
-//   return res.send();
-// }
-// export function deleteFilm(req: Request, res: Response) {
-//   const infos = {
-//     title: 'filme bom',
-//     description: 'Filme bom demais'
-//   };
-//   CreateFilmService.execute(infos);
-
-//   return res.send();
-// }
