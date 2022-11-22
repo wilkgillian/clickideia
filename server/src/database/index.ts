@@ -10,8 +10,12 @@ const myDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [],
-  migrations: ["./src/database/migrations"],
+  migrations: ["./src/database/migrations/*.ts"],
   subscribers: [],
 });
 
-myDataSource.initialize();
+export function createConnection(host = "database"): Promise<DataSource> {
+  return myDataSource.setOptions({ host }).initialize();
+}
+
+export default myDataSource;

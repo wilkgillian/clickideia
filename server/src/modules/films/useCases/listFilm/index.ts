@@ -2,7 +2,7 @@ import { FilmRepository } from "../../repositories/implementations/FilmsReposito
 import { ListFilmController } from "./listFilmController";
 import { ListFilmUseCase } from "./listFilmUseCase";
 
-const filmRepository = FilmRepository.getInstance();
+const filmRepository = null;
 const listFilmUseCase = new ListFilmUseCase(filmRepository);
 const listFilmController = new ListFilmController(listFilmUseCase);
 

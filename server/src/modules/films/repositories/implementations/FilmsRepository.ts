@@ -1,5 +1,8 @@
-import S3Storage from '../../../../utils/S3Storage';
-import { Film } from '../../model/Film';
+import { IFilmsRepository } from "./../IFilmsRepository";
+import { getRepository, Repository } from "typeorm";
+import S3Storage from "../../../../utils/S3Storage";
+import { Film } from "../../entities/Film";
+import myDataSource from "../../../../database";
 
 export interface ICreateFilmDTO {
   id?: string;
@@ -23,42 +26,45 @@ export interface ICreateFilmDTO {
   // url?: number;
 }
 
-class FilmRepository {
-  private films: Film[];
+class FilmRepository implements IFilmsRepository {
+  private films: Repository<Film>;
 
-  private static INSTANCE: FilmRepository;
+  // private static INSTANCE: FilmRepository;
 
-  private constructor() {
-    this.films = [];
+  constructor() {
+    this.films = myDataSource.getRepository(Film);
   }
 
-  public static getInstance(): FilmRepository {
-    if (!FilmRepository.INSTANCE) {
-      FilmRepository.INSTANCE = new FilmRepository();
-    }
-    return FilmRepository.INSTANCE;
-  }
+  // public static getInstance(): FilmRepository {
+  //   if (!FilmRepository.INSTANCE) {
+  //     FilmRepository.INSTANCE = new FilmRepository();
+  //   }
+  //   return FilmRepository.INSTANCE;
+  // }
 
   async create({
     title,
     description,
-    url_file
+    url_file,
   }: ICreateFilmDTO): Promise<void> {
-    const film = new Film();
-    Object.assign(film, {
+    const film = this.films.create({
       title,
       description,
-      created_at: new Date(),
-      url_file: url_file
+      url_file,
     });
-    this.films.push(film);
+    await this.films.save(film);
   }
-  list(): Film[] {
-    return this.films;
+  async list(): Promise<Film[]> {
+    const films = await this.films.find();
+    return films;
   }
-  findByName(film_title: string) {
-    const title = this.films.find(title => title.title === film_title);
-    return title;
+  async findByName(title: string): Promise<Film> {
+    const film = await this.films.findOne({
+      where: {
+        title: title,
+      },
+    });
+    return film;
   }
 }
 

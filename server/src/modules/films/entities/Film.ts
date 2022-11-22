@@ -1,14 +1,21 @@
-import { v4 as uuidV4 } from 'uuid';
+import { v4 as uuidV4 } from "uuid";
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
+@Entity("films")
 class Film {
+  @PrimaryColumn()
   id?: string;
+  @Column()
   title: string;
+  @CreateDateColumn()
   created_at: Date;
+  @Column()
   url_file: string;
   // original_title?: string;
   // original_title_romanised?: string;
   // image: string;
   // movie_banner: string;
+  @Column()
   description: string;
   // director: string;
   // producer: string;

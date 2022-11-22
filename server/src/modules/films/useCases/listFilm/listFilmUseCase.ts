@@ -1,10 +1,10 @@
 import { IFilmsRepository } from "../../repositories/IFilmsRepository";
-import { Film } from "../../model/Film";
+import { Film } from "../../entities/Film";
 
 class ListFilmUseCase {
   constructor(private filmsRespository: IFilmsRepository) {}
-  execute(): Film[] {
-    const films = this.filmsRespository.list();
+  async execute(): Promise<Film[]> {
+    const films = await this.filmsRespository.list();
 
     return films;
   }

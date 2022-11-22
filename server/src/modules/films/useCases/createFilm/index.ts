@@ -2,9 +2,10 @@ import { FilmRepository } from "../../repositories/implementations/FilmsReposito
 import { CreateFilmController } from "./createFilmController";
 import { CreateFilmUseCase } from "./CreateFilmUseCase";
 
-const filmsRepository = FilmRepository.getInstance();
-const createFilmUseCase = new CreateFilmUseCase(filmsRepository);
+export default (): CreateFilmController => {
+  const filmsRepository = new FilmRepository();
+  const createFilmUseCase = new CreateFilmUseCase(filmsRepository);
+  const createFilmController = new CreateFilmController(createFilmUseCase);
 
-const createFilmController = new CreateFilmController(createFilmUseCase);
-
-export { createFilmController };
+  return createFilmController;
+};
