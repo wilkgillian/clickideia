@@ -2,16 +2,23 @@ import { Router } from "express";
 import multer from "multer";
 
 import { api } from "../modules/films/services/api";
-import createFilmController from "../modules/films/useCases/createFilm";
+import { CreateFilmController } from "../modules/films/useCases/createFilm/createFilmController";
 import { listFilmController } from "../modules/films/useCases/listFilm";
 import uploadConfig from "../utils/multer";
+import { uploadImage } from "../utils/uploadImage";
 
 const filmsRoutes = Router();
 
 const upload = multer(uploadConfig);
 
-filmsRoutes.post("/create", upload.single("file"), (req, res) => {
-  return createFilmController().handle(req, res);
+const createFilmController = new CreateFilmController();
+
+filmsRoutes.patch("/create", upload.single("file"), createFilmController.handle);
+
+filmsRoutes.post("/upload", upload.single("file"), async (req, res) => {
+  uploadImage(req);
+
+  return res.status(201).send({ message: "Success" });
 });
 
 filmsRoutes.get("/", (req, res) => {

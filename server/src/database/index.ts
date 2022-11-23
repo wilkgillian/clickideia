@@ -9,7 +9,7 @@ const myDataSource = new DataSource({
   database: "filimo",
   synchronize: false,
   logging: false,
-  entities: [],
+  entities: ["./src/modules/**/entities/*.ts", "./src/modules/accounts/**/entities/*.ts"],
   migrations: ["./src/database/migrations/*.ts"],
   subscribers: [],
 });

@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\wilk.silva\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/ts-node-dev
+  C:\Program Files\nodejs\node.exe C:\Users\wilk.silva\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add polyfill
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\SafeNet\Authentication\SAC\x64;C:\Program Files\SafeNet\Authentication\SAC\x32;C:\Program Files\nodejs\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\Users\wilk.silva\AppData\Local\Microsoft\WindowsApps;C:\Users\wilk.silva\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\wilk.silva\AppData\Local\Programs\Git\cmd;C:\Users\wilk.silva\AppData\Roaming\npm;C:\Users\wilk.silva\.deta\bin
@@ -14,17 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fts-node-dev: Not found
-      at Request.params.callback [as _callback] (C:\Users\wilk.silva\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66145:18)
-      at Request.self.callback (C:\Users\wilk.silva\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140890:22)
-      at Request.emit (node:events:527:28)
-      at Request.<anonymous> (C:\Users\wilk.silva\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141862:10)
-      at Request.emit (node:events:527:28)
-      at IncomingMessage.<anonymous> (C:\Users\wilk.silva\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141784:12)
-      at Object.onceWrapper (node:events:641:28)
-      at IncomingMessage.emit (node:events:539:35)
-      at endReadableNT (node:internal/streams/readable:1345:12)
-      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+  Error: EPERM: operation not permitted, unlink 'C:\Users\wilk.silva\Documents\filimo\server\node_modules\.bin\ts-node-dev'
 
 npm manifest: 
   {
@@ -38,7 +28,9 @@ npm manifest:
     },
     "scripts": {
       "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
-      "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js"
+      "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+      "migration-create": "typeorm-ts-node-commonjs migration:create ./src/database/migrations/",
+      "migration-run": "typeorm-ts-node-commonjs migration:run -d ./src/database/index.ts"
     },
     "dependencies": {
       "@types/aws-sdk": "^2.7.0",
@@ -57,6 +49,7 @@ npm manifest:
       "pg": "^8.8.0",
       "reflect-metadata": "^0.1.13",
       "swagger-ui-express": "^4.6.0",
+      "tsyringe": "^4.7.0",
       "typeorm": "^0.3.10",
       "uuid": "^9.0.0"
     }
@@ -4045,10 +4038,22 @@ Lockfile:
       strip-bom "^3.0.0"
       strip-json-comments "^2.0.0"
   
+  tslib@^1.9.3:
+    version "1.14.1"
+    resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.14.1.tgz#cf2d38bdc34a134bcaf1091c41f6619e2f672d00"
+    integrity sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg==
+  
   tslib@^2.3.1:
     version "2.4.1"
     resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.1.tgz#0d0bfbaac2880b91e22df0768e55be9753a5b17e"
     integrity sha512-tGyy4dAjRIEwI7BzsB0lynWgOpfqjUdq91XXAlIWD2OwKBH7oCl/GZG/HT4BOHrTlPMOASlMQ7veyTqpmRcrNA==
+  
+  tsyringe@^4.7.0:
+    version "4.7.0"
+    resolved "https://registry.yarnpkg.com/tsyringe/-/tsyringe-4.7.0.tgz#aea0a9d565385deebb6def60cda342b15016f283"
+    integrity sha512-ncFDM1jTLsok4ejMvSW5jN1VGPQD48y2tfAR0pdptWRKYX4bkbqPt92k7KJ5RFJ1KV36JEs/+TMh7I6OUgj74g==
+    dependencies:
+      tslib "^1.9.3"
   
   tunnel-agent@^0.6.0:
     version "0.6.0"

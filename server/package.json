@@ -28,8 +28,10 @@
     "multer": "^1.4.5-lts.1",
     "nodejs-image-parser": "^1.0.2",
     "pg": "^8.8.0",
+    "polyfill": "^0.1.0",
     "reflect-metadata": "^0.1.13",
     "swagger-ui-express": "^4.6.0",
+    "tsyringe": "^4.7.0",
     "typeorm": "^0.3.10",
     "uuid": "^9.0.0"
   }

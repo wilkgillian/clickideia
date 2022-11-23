@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import { FilmRepository } from "../../repositories/implementations/FilmsRepository";
 
 interface IRequest {
@@ -6,8 +7,12 @@ interface IRequest {
   url_file: string;
 }
 
+@injectable()
 class CreateFilmUseCase {
-  constructor(private filmRepository: FilmRepository) {}
+  constructor(
+    @inject("FilmsRepository")
+    private filmRepository: FilmRepository
+  ) {}
 
   async execute({ title, description, url_file }: IRequest): Promise<void> {
     const filmAlreadyExists = await this.filmRepository.findByName(title);
