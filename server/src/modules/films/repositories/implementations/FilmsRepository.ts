@@ -1,13 +1,12 @@
 import { IFilmsRepository } from "./../IFilmsRepository";
-import { getRepository, Repository } from "typeorm";
-import S3Storage from "../../../../utils/S3Storage";
+import { Repository } from "typeorm";
 import { Film } from "../../entities/Film";
 import myDataSource from "../../../../database";
 
 export interface ICreateFilmDTO {
   id?: string;
   title: string;
-  created_at: Date;
+  created_at?: Date;
   url_file: string;
   // original_title?: string;
   // original_title_romanised?: string;

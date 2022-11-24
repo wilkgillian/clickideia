@@ -1,31 +1,32 @@
 import { inject, injectable } from "tsyringe";
-import { FilmRepository } from "../../repositories/implementations/FilmsRepository";
+import { Film } from "../../entities/Film";
+import { IFilmsRepository } from "../../repositories/IFilmsRepository";
+import { ICreateFilmDTO } from "../../repositories/implementations/FilmsRepository";
 
-interface IRequest {
-  title: string;
-  description: string;
-  url_file: string;
-}
 
 @injectable()
 class CreateFilmUseCase {
   constructor(
     @inject("FilmsRepository")
-    private filmRepository: FilmRepository
+    private filmRepository: IFilmsRepository
   ) {}
 
-  async execute({ title, description, url_file }: IRequest): Promise<void> {
+  async execute({
+    title,
+    description,
+    url_file,
+  }: ICreateFilmDTO): Promise<void> {
     const filmAlreadyExists = await this.filmRepository.findByName(title);
     if (filmAlreadyExists) {
       throw new Error("Filme já existe");
     }
-    const created_at = new Date();
-    this.filmRepository.create({
+    // const created_at = new Date();
+    await this.filmRepository.create({
       title,
       description,
-      created_at,
       url_file: url_file,
     });
+
   }
 }
 

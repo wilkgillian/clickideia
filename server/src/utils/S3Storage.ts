@@ -18,9 +18,9 @@ class S3Storage {
     const originalPath = path.resolve(uploadConfig.directory, filename);
     const ContentType = mime.getType(originalPath);
     const url_file = `https://filimo.s3.sa-east-1.amazonaws.com/${filename}`;
-    if (!ContentType) {
-      throw new Error('File not found');
-    }
+    // if (!ContentType) {
+    //   throw new Error('File not found');
+    // }
 
     const fileContent = await fs.promises.readFile(originalPath);
 

@@ -13,7 +13,7 @@ const upload = multer(uploadConfig);
 
 const createFilmController = new CreateFilmController();
 
-filmsRoutes.patch("/create", upload.single("file"), createFilmController.handle);
+filmsRoutes.post("/create", upload.single("file"), createFilmController.handle);
 
 filmsRoutes.post("/upload", upload.single("file"), async (req, res) => {
   uploadImage(req);

@@ -1,4 +1,6 @@
+import "reflect-metadata"
 import { DataSource } from "typeorm";
+import { Film } from "../modules/films/entities/Film";
 
 const myDataSource = new DataSource({
   type: "postgres",
@@ -7,9 +9,9 @@ const myDataSource = new DataSource({
   username: "docker",
   password: "wilk1998",
   database: "filimo",
-  synchronize: false,
+  synchronize: true,
   logging: false,
-  entities: ["./src/modules/**/entities/*.ts", "./src/modules/accounts/**/entities/*.ts"],
+  entities: [Film],
   migrations: ["./src/database/migrations/*.ts"],
   subscribers: [],
 });

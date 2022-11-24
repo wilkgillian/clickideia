@@ -1,8 +1,8 @@
 import { v4 as uuidV4 } from "uuid";
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
-@Entity("films")
-class Film {
+@Entity()
+export class Film {
   @PrimaryColumn()
   id?: string;
   @Column()
@@ -33,4 +33,3 @@ class Film {
     }
   }
 }
-export { Film };
