@@ -1,39 +1,39 @@
-import { MigrationInterface, QueryRunner, Table } from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
 export class CreateFilms1669043789353 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: "films",
+        name: 'films',
         columns: [
           {
-            name: "id",
-            type: "uuid",
-            isPrimary: true,
+            name: 'id',
+            type: 'uuid',
+            isPrimary: true
           },
           {
-            name: "title",
-            type: "varchar",
+            name: 'title',
+            type: 'varchar'
           },
           {
-            name: "created_at",
-            type: "timestamp",
-            default: "now()",
+            name: 'created_at',
+            type: 'timestamp',
+            default: 'now()'
           },
           {
-            name: "url_file",
-            type: "varchar",
+            name: 'url_file',
+            type: 'varchar'
           },
           {
-            name: "description",
-            type: "varchar",
-          },
-        ],
+            name: 'description',
+            type: 'varchar'
+          }
+        ]
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable("Film");
+    await queryRunner.dropTable('films');
   }
 }
