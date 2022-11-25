@@ -4,7 +4,7 @@ import { Request, Response } from "express";
 import { uploadImage } from "../../../../utils/uploadImage";
 import { CreateFilmUseCase } from "./CreateFilmUseCase";
 
-class CreateFilmController {
+export class CreateFilmController {
   async handle(req: Request, res: Response): Promise<Response<string>> {
     const { title, description } = req.body;
     const createFilmUseCase = container.resolve(CreateFilmUseCase);
@@ -22,4 +22,3 @@ class CreateFilmController {
   }
 }
 
-export { CreateFilmController };

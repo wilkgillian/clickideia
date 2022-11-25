@@ -7,7 +7,8 @@ import { ICreateFilmDTO } from "../../repositories/implementations/FilmsReposito
 @injectable()
 export class CreateFilmUseCase {
   constructor(
-    @inject("FilmsRepository") private filmsRepository: IFilmsRepository
+    @inject("FilmsRepository")
+    private filmsRepository: IFilmsRepository
   ) {}
 
   async execute({
@@ -20,11 +21,12 @@ export class CreateFilmUseCase {
     if (filmAlreadyExists) {
       throw new Error("Filme já existe");
     }
-    // const created_at = new Date();
+    const created_at = new Date();
     await this.filmsRepository.create({
-      title,
-      description,
-      url_file,
+      title: title,
+      description: description,
+      created_at: created_at,
+      url_file: url_file,
     });
     console.log("\nAwait passou aqui 2");
   }
