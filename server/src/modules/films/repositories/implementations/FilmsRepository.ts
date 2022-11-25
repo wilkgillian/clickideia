@@ -1,9 +1,9 @@
-import { Film } from './../../entities/Film';
+import { Film } from "./../../entities/Film";
 import { IFilmsRepository } from "./../IFilmsRepository";
 import { Entity, Repository } from "typeorm";
 // import myDataSource, { createConnection } from "../../../../database";
 import { User } from "../../../accounts/entities/User";
-import myDataSource from '../../../../database';
+import myDataSource from "../../../../database";
 
 export interface ICreateFilmDTO {
   id?: string;
@@ -23,16 +23,15 @@ class FilmRepository implements IFilmsRepository {
   async create({
     title,
     description,
-    created_at,
     url_file,
-  }: ICreateFilmDTO): Promise<void> {
+  }: ICreateFilmDTO): Promise<Film> {
     const film = this.films.create({
       title,
       description,
-      created_at,
       url_file,
     });
     await this.films.save(film);
+    return film;
   }
   async list(): Promise<Film[]> {
     const films = await this.films.find();

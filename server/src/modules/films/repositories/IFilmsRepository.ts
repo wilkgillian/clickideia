@@ -7,7 +7,6 @@ export interface IFilmsRepository {
   create({
     title,
     description,
-    url_file,
-    created_at,
-  }: ICreateFilmDTO): Promise<void>;
+    url_file
+  }: ICreateFilmDTO): Promise<Film>;
 }
