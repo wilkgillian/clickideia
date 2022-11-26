@@ -1,5 +1,5 @@
-import { IFilmsRepository } from "../../repositories/IFilmsRepository";
-import { Film } from "../../entities/Film";
+import { IFilmsRepository } from '../../repositories/IFilmsRepository';
+import { Film } from '../../infra/typeorm/entities/Film';
 
 class ListFilmUseCase {
   constructor(private filmsRespository: IFilmsRepository) {}

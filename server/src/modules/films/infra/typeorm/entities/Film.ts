@@ -1,16 +1,19 @@
-import { v4 as uuidV4 } from "uuid";
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import { v4 as uuidV4 } from 'uuid';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn
+} from 'typeorm';
 
-@Entity("films")
+@Entity('films')
 export class Film {
-  @PrimaryColumn()
-  id?: string;
+  @PrimaryGeneratedColumn()
+  id: string;
   @Column()
   title: string;
   @CreateDateColumn()
   created_at: Date;
-  @Column()
-  url_file: string;
   @Column()
   description: string;
 

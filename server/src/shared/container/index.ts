@@ -1,16 +1,8 @@
-import "reflect-metadata"
-import { container } from "tsyringe";
-import { IFilmsRepository } from "./../../modules/films/repositories/IFilmsRepository";
-import { FilmRepository } from "../../modules/films/repositories/implementations/FilmsRepository";
-import { IUserRepository } from "../../modules/accounts/repositories/IUserRepository";
-import { UsersRepository } from "../../modules/accounts/repositories/implementations/UsersRepository";
+import { container } from 'tsyringe';
+import { FilmRepository } from '../../modules/films/infra/typeorm/repositories/FilmsRepository';
+import { IFilmsRepository } from '../../modules/films/repositories/IFilmsRepository';
 
 container.registerSingleton<IFilmsRepository>(
-  "FilmsRepository",
+  'FilmsRepository',
   FilmRepository
 );
-
-// container.registerSingleton<IUserRepository>(
-//   "UsersRepository",
-//   UsersRepository
-// );

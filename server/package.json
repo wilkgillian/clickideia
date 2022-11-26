@@ -8,10 +8,10 @@
     "typescript": "^4.9.3"
   },
   "scripts": {
-    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/server.ts",
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
-    "migration-create": "typeorm-ts-node-commonjs migration:create ./src/database/migrations/",
-    "migration-run": "typeorm-ts-node-commonjs migration:run -d ./src/database/index.ts"
+    "migration-create": "typeorm-ts-node-commonjs migration:create ./src/shared/infra/typeorm/migrations/",
+    "migration-run": "ts-node-dev ./node_modules/typeorm/cli.js migration:run -d ./src/shared/infra/typeorm/index.ts"
   },
   "dependencies": {
     "@types/aws-sdk": "^2.7.0",

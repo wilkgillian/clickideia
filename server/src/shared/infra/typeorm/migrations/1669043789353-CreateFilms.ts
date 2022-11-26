@@ -20,10 +20,10 @@ export class CreateFilms1669043789353 implements MigrationInterface {
             type: 'timestamp',
             default: 'now()'
           },
-          {
-            name: 'url_file',
-            type: 'varchar'
-          },
+          // {
+          //   name: 'url_file',
+          //   type: 'varchar'
+          // },
           {
             name: 'description',
             type: 'varchar'

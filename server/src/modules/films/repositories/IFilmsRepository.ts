@@ -1,12 +1,6 @@
-import { Film } from "../entities/Film";
-import { ICreateFilmDTO } from "./implementations/FilmsRepository";
-
+import { ICreateFilmDTO } from '../dtos/ICreateFilmDTO';
+import { Film } from '../infra/typeorm/entities/Film';
 export interface IFilmsRepository {
+  create(data: ICreateFilmDTO): Promise<Film>;
   findByName(title: string): Promise<Film>;
-  list(): Promise<Film[]>;
-  create({
-    title,
-    description,
-    url_file
-  }: ICreateFilmDTO): Promise<Film>;
 }
