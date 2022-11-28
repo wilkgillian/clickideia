@@ -16,6 +16,9 @@ const createFilmController = new CreateFilmController();
 const updateFilmsController = new UpdateFilmsController();
 
 filmsRoutes.post("/create", upload.single("file"), createFilmController.handle);
+filmsRoutes.post("/teste", upload.array("images", 2), (req, res) => {
+  console.log(req.files);
+});
 
 filmsRoutes.get("/update", updateFilmsController.handle);
 
