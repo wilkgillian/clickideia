@@ -1,21 +1,40 @@
-import { v4 as uuidV4 } from 'uuid';
-import {
-  Column,
-  CreateDateColumn,
-  Entity,
-  PrimaryGeneratedColumn
-} from 'typeorm';
+import { v4 as uuidV4 } from "uuid";
+import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 
-@Entity('films')
+@Entity("films")
 export class Film {
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id: string;
+
   @Column()
   title: string;
-  @CreateDateColumn()
-  created_at: Date;
+
   @Column()
   description: string;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @Column()
+  image: string;
+
+  @Column()
+  movie_banner: string;
+
+  @Column()
+  director: string;
+
+  @Column()
+  producer: string;
+
+  @Column()
+  release_date: number;
+
+  @Column()
+  running_time: number;
+
+  @Column()
+  rt_score: number;
 
   constructor() {
     if (!this.id) {

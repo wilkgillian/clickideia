@@ -1,22 +1,21 @@
-import { DataSource } from 'typeorm';
-import { Film } from '../../../modules/films/infra/typeorm/entities/Film';
-import { CreateFilms1669043789353 } from './migrations/1669043789353-CreateFilms';
+import { DataSource } from "typeorm";
+import { Film } from "../../../modules/films/infra/typeorm/entities/Film";
+import { CreateFilms1669043789353 } from "./migrations/1669043789353-CreateFilms";
 
 const myDataSource = new DataSource({
-  type: 'postgres',
+  type: "postgres",
   port: 5432,
-  host: 'localhost',
-  username: 'docker',
-  password: 'wilk1998',
-  database: 'filimo',
-  // synchronize: true,
-  // logging: false,
+  host: "localhost",
+  username: "docker",
+  password: "wilk1998",
+  database: "database_filimo",
   entities: [Film],
-  migrations: [CreateFilms1669043789353]
-  // subscribers: []
+  migrations: [CreateFilms1669043789353],
 });
 
-export async function createConnection(host = 'database'): Promise<DataSource> {
+export async function createConnection(
+  host = "database_filimo"
+): Promise<DataSource> {
   return await myDataSource.setOptions({ host }).initialize();
 }
 

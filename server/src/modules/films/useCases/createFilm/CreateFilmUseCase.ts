@@ -1,32 +1,43 @@
-import { inject, injectable } from 'tsyringe';
-import { Film } from '../../infra/typeorm/entities/Film';
-import { IFilmsRepository } from '../../repositories/IFilmsRepository';
+import { inject, injectable } from "tsyringe";
+import { ICreateFilmDTO } from "../../dtos/ICreateFilmDTO";
+import { Film } from "../../infra/typeorm/entities/Film";
+import { IFilmsRepository } from "../../repositories/IFilmsRepository";
 
-interface IRequest {
-  title: string;
-  description: string;
-}
 @injectable()
 export class CreateFilmUseCase {
   constructor(
-    @inject('FilmsRepository')
+    @inject("FilmsRepository")
     private repository: IFilmsRepository
   ) {}
 
-  async execute({ title, description }: IRequest): Promise<Film> {
+  async execute({
+    title,
+    description,
+    image,
+    movie_banner,
+    director,
+    producer,
+    release_date,
+    rt_score,
+    running_time,
+  }: ICreateFilmDTO): Promise<Film> {
     const filmAlreadyExists = await this.repository.findByName(title);
     if (filmAlreadyExists) {
-      throw new Error('Filme já existe');
+      throw new Error("Filme já existe");
     }
-    console.log('chegou aqui');
 
     const film = await this.repository.create({
-      title: title,
-      description: description
+      title,
+      description,
+      image,
+      movie_banner,
+      director,
+      producer,
+      release_date,
+      rt_score,
+      running_time,
     });
-    console.log(film);
 
-    console.log('\nAwait passou aqui 2');
     return film;
   }
 }

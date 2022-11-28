@@ -17,10 +17,10 @@ class S3Storage {
   async saveFile(filename: string): Promise<string> {
     const originalPath = path.resolve(uploadConfig.directory, filename);
     const ContentType = mime.getType(originalPath);
-    const url_file = `https://filimo.s3.sa-east-1.amazonaws.com/${filename}`;
-    // if (!ContentType) {
-    //   throw new Error('File not found');
-    // }
+    const url_file = `${process.env.AWS_FILE_URL}${filename}`;
+    if (!ContentType) {
+      throw new Error('File not found');
+    }
 
     const fileContent = await fs.promises.readFile(originalPath);
 
