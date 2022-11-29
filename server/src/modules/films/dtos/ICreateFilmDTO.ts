@@ -10,4 +10,5 @@ export interface ICreateFilmDTO {
   release_date: number;
   running_time: number;
   rt_score: number;
+  genre: string;
 }

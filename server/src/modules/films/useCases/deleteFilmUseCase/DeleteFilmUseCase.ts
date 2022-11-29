@@ -1,16 +1,15 @@
 import { IFilmsRepository } from "../../repositories/IFilmsRepository";
-import { Film } from "../../infra/typeorm/entities/Film";
 import { inject, injectable } from "tsyringe";
 
 @injectable()
-export class ListFilmUseCase {
+export class DeleteFilmUseCase {
   constructor(
     @inject("FilmsRepository")
     private filmsRespository: IFilmsRepository
   ) {}
-  async execute(): Promise<Film[]> {
-    const films = await this.filmsRespository.list();
+  async execute(id: string): Promise<string> {
+    await this.filmsRespository.delete(id);
 
-    return films;
+    return "success";
   }
 }

@@ -52,6 +52,10 @@ export class CreateFilms1669043789353 implements MigrationInterface {
             name: "rt_score",
             type: "int",
           },
+          {
+            name: "genre",
+            type: "varchar",
+          },
         ],
       })
     );

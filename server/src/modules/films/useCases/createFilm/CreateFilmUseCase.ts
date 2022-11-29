@@ -20,6 +20,7 @@ export class CreateFilmUseCase {
     release_date,
     rt_score,
     running_time,
+    genre,
   }: ICreateFilmDTO): Promise<Film> {
     const filmAlreadyExists = await this.repository.findByName(title);
     if (filmAlreadyExists) {
@@ -36,6 +37,7 @@ export class CreateFilmUseCase {
       release_date,
       rt_score,
       running_time,
+      genre,
     });
 
     return film;

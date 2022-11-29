@@ -1,13 +1,11 @@
 import { Request, Response } from "express";
-import { ListFilmUseCase } from "./listFilmUseCase";
+import { container } from "tsyringe";
+import { ListFilmUseCase } from "./ListFilmUseCase";
 
-class ListFilmController {
-  constructor(private listFilmsUseCase: ListFilmUseCase) {}
-
-  handle(req: Request, res: Response): Response {
-    const all = this.listFilmsUseCase.execute();
-    return res.json(all);
+export class ListFilmsController {
+  async handle(req: Request, res: Response): Promise<Response> {
+    const listFilmsUseCase = container.resolve(ListFilmUseCase);
+    const all = await listFilmsUseCase.execute();
+    return res.status(201).json(all);
   }
 }
-
-export { ListFilmController };

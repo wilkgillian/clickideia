@@ -1,9 +1,9 @@
 import { container } from "tsyringe";
 import { Request, Response } from "express";
-import { CreateFilmUseCase } from "./CreateFilmUseCase";
 import { uploadImageOnS3 } from "../../../../utils/uploadImage";
+import { UpdateFilmUseCase } from "./UpdateFilmUseCase";
 
-export class CreateFilmController {
+export class UpdateFilmController {
   async handle(req: Request, res: Response): Promise<Response> {
     const {
       title,
@@ -15,22 +15,23 @@ export class CreateFilmController {
       rt_score,
       running_time,
       genre,
+      id,
     } = req.body;
 
-    const createFilmUseCase = container.resolve(CreateFilmUseCase);
+    const updateFilmUseCase = container.resolve(UpdateFilmUseCase);
 
     const image_url = await uploadImageOnS3(req);
-    const film = await createFilmUseCase.execute({
+    const film = await updateFilmUseCase.execute(id, {
+      genre,
       title,
-      description,
       image: image_url,
-      movie_banner,
+      description,
       director,
       producer,
       release_date,
+      movie_banner,
       rt_score,
       running_time,
-      genre,
     });
 
     return res.status(201).json(film);

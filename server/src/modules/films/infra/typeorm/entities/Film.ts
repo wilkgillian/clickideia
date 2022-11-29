@@ -35,6 +35,9 @@ export class Film {
 
   @Column()
   rt_score: number;
+  
+  @Column()
+  genre: string;
 
   constructor() {
     if (!this.id) {
