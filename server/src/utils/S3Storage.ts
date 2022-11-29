@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import mime from 'mime';
+import crypto from 'crypto';
 import aws, { S3 } from 'aws-sdk';
 
 import uploadConfig from '../utils/multer';
@@ -17,7 +18,6 @@ class S3Storage {
   async saveFile(filename: string): Promise<string> {
     const originalPath = path.resolve(uploadConfig.directory, filename);
     const ContentType = mime.getType(originalPath);
-    const url_file = `${process.env.AWS_FILE_URL}${filename}`;
     if (!ContentType) {
       throw new Error('File not found');
     }
@@ -32,7 +32,10 @@ class S3Storage {
         ContentType: path.resolve(uploadConfig.directory, filename)
       })
       .promise();
-
+    const url_file = this.client.getSignedUrl('getObject', {
+      Bucket: process.env.AWS_BUCKET_NAME,
+      Key: filename
+    });
     await fs.promises.unlink(originalPath);
     return url_file;
   }

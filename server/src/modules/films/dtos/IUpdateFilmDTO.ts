@@ -12,3 +12,8 @@ export interface IUpdateFilmDTO {
   rt_score?: number;
   genre?: string;
 }
+
+export interface IUpdateMovieBanner {
+  id: string;
+  movie_banner: string;
+}
