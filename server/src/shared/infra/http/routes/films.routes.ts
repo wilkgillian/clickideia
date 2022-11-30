@@ -29,17 +29,6 @@ filmsRoutes.patch(
   upload.single('file'),
   updateMovieBannerController.handle
 );
-// filmsRoutes.post(
-//   '/teste',
-//   upload.fields([
-//     { name: 'image', maxCount: 1 },
-//     { name: 'movie_banner', maxCount: 1 }
-//   ]),
-//   (req, res) => {
-//     console.log(req.files);
-//   }
-//   // createFilmController.handle
-// );
 
 filmsRoutes.get('/update', updateFilmsController.handle);
 

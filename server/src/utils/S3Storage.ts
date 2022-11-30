@@ -34,7 +34,8 @@ class S3Storage {
       .promise();
     const url_file = this.client.getSignedUrl('getObject', {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: filename
+      Key: filename,
+      Expires: 31536000
     });
     await fs.promises.unlink(originalPath);
     return url_file;

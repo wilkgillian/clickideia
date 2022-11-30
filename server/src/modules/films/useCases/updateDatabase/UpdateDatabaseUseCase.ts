@@ -1,5 +1,4 @@
 import { inject, injectable } from "tsyringe";
-import { ICreateFilmDTO } from "../../dtos/ICreateFilmDTO";
 import { Film } from "../../infra/typeorm/entities/Film";
 import { IFilmsRepository } from "../../repositories/IFilmsRepository";
 

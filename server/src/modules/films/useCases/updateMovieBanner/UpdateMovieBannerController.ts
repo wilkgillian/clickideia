@@ -12,7 +12,7 @@ export class UpdateMovieBannerController {
     );
 
     const image_url = await uploadImageOnS3(req);
-    // console.log(image_url);
+  
     const film = await updateMovieBannerUseCase.execute({
       id: id,
       movie_banner: image_url

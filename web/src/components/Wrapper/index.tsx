@@ -1,37 +1,45 @@
-import { Box, HStack, Text, Image } from '@chakra-ui/react';
-import { Carousel } from 'react-responsive-carousel';
+import { Box, HStack, Text, Image, Flex, styled } from "@chakra-ui/react";
+import { ReactNode } from "react";
+import Carousel, { ReactElasticCarouselProps } from "react-elastic-carousel";
+// import "./styles.css";
 
-import Banner from '../../../public/assets/banner.png';
-import { useFilms } from '../hooks/useFilms';
+import Banner from "../../../public/assets/banner.png";
+import CarouselCategories from "../Carousel/CarouselCategories";
+import { useFilms } from "../hooks/useFilms";
 
 interface WrapperProps {
-  categories: string;
+  // categories: string;
   dados: FilmsProps[];
+}
+interface CarouselProps extends ReactElasticCarouselProps {
+  children: ReactNode;
 }
 interface FilmsProps {
   id: string;
   image: string;
+  title: string;
+  description: string;
 }
 
-export default function Wrapper({ categories, dados }: WrapperProps) {
+export default function Wrapper({ dados }: WrapperProps) {
+  const breakPoints = [
+    { width: 1, itemsToShow: 1 },
+    { width: 550, itemsToShow: 2, itemsToScroll: 2 },
+    { width: 768, itemsToShow: 3, itemsToScroll: 4 },
+    { width: 1200, itemsToShow: 10, itemsToScroll: 6 },
+  ];
   return (
     <Box p={10}>
-      <Text fontSize={24} fontWeight="bold" mt={-10} mb={5}>
-        {categories}
-      </Text>
-      <HStack gap={5}>
-        <Carousel autoPlay={true} axis="horizontal" infiniteLoop={true}>
-          {dados.map(inf => (
-            <Image
-              key={inf.id}
-              src={inf.image}
-              width={200}
-              alt="banner"
-              borderRadius={10}
-            />
+      <HStack gap={5} display="flex" alignItems="center">
+        <Carousel breakPoints={breakPoints} enableAutoPlay={true} itemPadding={[1]}>
+          {dados.map((inf) => (
+            // <Flex key={inf.id} h={300} w={200}>
+            <Image src={inf.image} alt={inf.title} borderRadius={10} />
+            // </Flex>
           ))}
         </Carousel>
       </HStack>
     </Box>
   );
 }
+
