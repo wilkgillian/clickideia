@@ -25,6 +25,12 @@ export const theme = extendTheme({
         bg: 'gray.900',
         color: 'gray.50'
       }
+    },
+    sx: {
+      '.swiper': {
+        padding: '0 32px'
+      }
     }
   }
+  
 });

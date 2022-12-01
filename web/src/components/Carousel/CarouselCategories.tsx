@@ -13,7 +13,7 @@ export default function CarouselCategories({ categories }: CarouselProps) {
     { width: 1, itemsToShow: 1 },
     { width: 550, itemsToShow: 2, itemsToScroll: 2 },
     { width: 768, itemsToShow: 4, itemsToScroll: 4 },
-    { width: 1200, itemsToShow: 10, itemsToScroll: 6 }
+    { width: 1200, itemsToShow: 7.5, itemsToScroll: 6 }
   ];
   return (
     <Box p={10}>

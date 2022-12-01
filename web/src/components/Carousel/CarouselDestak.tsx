@@ -1,10 +1,7 @@
 import { Carousel } from 'react-responsive-carousel';
-import { useContext, useEffect, useState } from 'react';
-import { api } from '../../services/api';
 import Destak from '../Hero';
 
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { FilmsContext } from '../../contexts/filmsContext';
 import { useFilms } from '../hooks/useFilms';
 
 export default function CarouselDestak() {
