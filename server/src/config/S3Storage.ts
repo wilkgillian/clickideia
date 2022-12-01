@@ -1,10 +1,9 @@
 import path from 'path';
 import fs from 'fs';
 import mime from 'mime';
-import crypto from 'crypto';
 import aws, { S3 } from 'aws-sdk';
 
-import uploadConfig from '../utils/multer';
+import uploadConfig from './multer';
 
 class S3Storage {
   private client: S3;

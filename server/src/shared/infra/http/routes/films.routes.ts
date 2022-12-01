@@ -7,7 +7,7 @@ import { ListFilmsController } from '../../../../modules/films/useCases/listFilm
 import { UpdateFilmsController as UpdateFilmsOnDatabaseController } from '../../../../modules/films/useCases/updateDatabase/UpdateDatabaseController';
 import { UpdateFilmController } from '../../../../modules/films/useCases/updateFilmUseCase/UpdateFilmController';
 import { UpdateMovieBannerController } from '../../../../modules/films/useCases/updateMovieBanner/UpdateMovieBannerController';
-import uploadConfig from '../../../../utils/multer';
+import uploadConfig from '../../../../config/multer';
 
 const filmsRoutes = Router();
 

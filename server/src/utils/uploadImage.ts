@@ -1,5 +1,5 @@
-import { Request } from 'express';
-import S3Storage from './S3Storage';
+import { Request } from "express";
+import S3Storage from "../config/S3Storage";
 
 export async function uploadImageOnS3(req: Request) {
   const { file } = req;
