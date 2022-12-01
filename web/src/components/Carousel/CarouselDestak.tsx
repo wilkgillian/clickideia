@@ -10,8 +10,14 @@ import { useFilms } from '../hooks/useFilms';
 export default function CarouselDestak() {
   const { dados } = useFilms();
   return (
-    <Carousel autoPlay={true} axis="horizontal" infiniteLoop={true}>
-      {dados.map(films => (
+    <Carousel
+      autoPlay={true}
+      axis="horizontal"
+      showThumbs={false}
+      showStatus={false}
+      infiniteLoop={true}
+    >
+      {dados.slice(0, 10).map(films => (
         <Destak
           key={films.id}
           title={films.title}

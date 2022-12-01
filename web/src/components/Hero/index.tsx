@@ -18,17 +18,19 @@ export default function Destak({
     <Box display="flex" w="100%" p={10}>
       <Box
         w="100%"
-        mt={10}
+        h={400}
         borderRadius={20}
         backgroundImage={`url(${movie_banner})`}
         backgroundPosition="top center"
         backgroundRepeat="no-repeat"
-        backgroundSize="100%"
+        backgroundSize="cover"
       >
         <Box
           w="100%"
-          h="auto"
+          h="inherit"
           display="flex"
+          flexDirection="column"
+          justifyContent="center"
           alignItems="left"
           textAlign="left"
           bgGradient="linear(to-r, #000, transparent)"
