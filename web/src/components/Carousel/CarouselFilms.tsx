@@ -1,32 +1,21 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { Swiper as SwiperComponent, SwiperSlide } from "swiper/react";
-import { useFilms } from "../hooks/useFilms";
+import { useFilms } from "../../hooks/useFilms";
 import { Navigation, Pagination } from "swiper";
+import { Card } from "../Cards";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { ReactNode } from "react";
-import { Card } from "../Cards";
 
 interface CarouselFilmsProps {
   categorie: string;
-  children: ReactNode;
 }
 
-export function CarouselWithSwiper({
-  categorie,
-  children,
-}: CarouselFilmsProps) {
+export function CarouselFilms({ categorie }: CarouselFilmsProps) {
   const { dados } = useFilms();
   return (
-    <Box width="100%" height="100%">
-      <Text
-        ml={10}
-        mb={10}
-        fontSize={24}
-        fontWeight="bold"
-        textTransform="uppercase"
-      >
+    <Box width="100%">
+      <Text ml={10} fontSize={24} fontWeight="bold" textTransform="uppercase">
         {categorie}
       </Text>
       <SwiperComponent
@@ -68,20 +57,8 @@ export function CarouselWithSwiper({
         }}
       >
         {dados.map((film) => (
-          <SwiperSlide>
-            {/* <Image
-              width={200}
-              minW={200}
-              height={300}
-              src={film.image}
-              alt={film.title}
-            /> */}
-            <Card
-              key={film.id}
-              image={film.image}
-              duration="120h"
-              title={film.title}
-            />
+          <SwiperSlide key={film.id}>
+            <Card image={film.image} title={film.title} />
           </SwiperSlide>
         ))}
       </SwiperComponent>

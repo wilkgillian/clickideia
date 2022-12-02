@@ -1,15 +1,13 @@
-import { Box, Button, Text } from "@chakra-ui/react";
-import { useState } from "react";
-import { BsPlay } from "react-icons/bs";
+import { Box, Flex, Icon } from "@chakra-ui/react";
+import Link from "next/link";
+import { BsPlayFill } from "react-icons/bs";
 
 interface CardProps {
   image: string;
   title: string;
-  duration: string;
 }
 
-export function Card({ image, title, duration }: CardProps) {
-  const [visible, setVisible] = useState(false);
+export function Card({ image, title }: CardProps) {
   return (
     <Box
       width={200}
@@ -34,22 +32,28 @@ export function Card({ image, title, duration }: CardProps) {
         display="flex"
         flexDirection="column"
         alignItems="center"
+        justifyContent="center"
         opacity={1}
-        justifyContent="flex-end"
         padding={5}
         bg="rgba(0, 0,0, 0.3)"
         transition="0.2s"
-        _hover={{ bg: "rgba(0, 0,0, 0)"}}
+        _hover={{ bg: "rgba(0, 0,0, 0)" }}
       >
-        <Text as="a" href="/films" fontSize={20} fontWeight="bold" color="rgba(255, 255, 255, 0.3)" textTransform="uppercase" _hover={{
-            color: 'rgba(0, 0,0, 1)'
-        }}>
-          {title}
-        </Text>
-        <Text>{duration}</Text>
-        <Button colorScheme="none" padding={0} borderRadius={50} bgColor="#000" display="flex" alignItems="center" justifyContent="center" width={50} h={50}>
-            <BsPlay fontSize={42} />
-        </Button>
+        <Link href={`/${title}`} passHref>
+          <Flex as="button">
+            <Icon
+              as={BsPlayFill}
+              transition="0.2s"
+              fontSize={100}
+              color="#fff"
+              textShadow="0 0 10px 10px #000"
+              opacity={0.2}
+              _hover={{
+                opacity: 1,
+              }}
+            />
+          </Flex>
+        </Link>
       </Box>
     </Box>
   );

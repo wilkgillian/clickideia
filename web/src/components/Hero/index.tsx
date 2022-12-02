@@ -3,14 +3,12 @@ import { BsPlayCircle } from 'react-icons/bs';
 
 interface DestakProps {
   title: string;
-  subtitle?: string;
   genre: string;
   movie_banner: string;
 }
 
 export default function Destak({
   title,
-  subtitle,
   genre,
   movie_banner
 }: DestakProps) {
@@ -43,13 +41,10 @@ export default function Destak({
             <Text fontSize={64} fontWeight="bold">
               {title}
             </Text>
-            <Text fontSize={40} fontWeight="medium">
-              {subtitle}
-            </Text>
             <Text fontSize={24}>{genre}</Text>
             <HStack>
               <BsPlayCircle fontSize={30} />
-              <Text fontSize={26}>Veja o trailer</Text>
+              <Text fontSize={26}>Assistir agora</Text>
             </HStack>
           </VStack>
         </Box>
