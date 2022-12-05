@@ -1,13 +1,13 @@
-import { Box, Flex, Icon } from "@chakra-ui/react";
-import Link from "next/link";
-import { BsPlayFill } from "react-icons/bs";
+import { Box, Flex, Icon } from '@chakra-ui/react';
+import Link from 'next/link';
+import { BsPlayFill } from 'react-icons/bs';
 
 interface CardProps {
   image: string;
-  title: string;
+  id: string;
 }
 
-export function Card({ image, title }: CardProps) {
+export function Card({ image, id }: CardProps) {
   return (
     <Box
       width={200}
@@ -18,12 +18,12 @@ export function Card({ image, title }: CardProps) {
       backgroundPosition="center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      transform={"scale(0.98)"}
+      transform={'scale(0.98)'}
       transition="0.2s"
       _hover={{
-        boxShadow: "0 0 10px 10px #000",
-        transform: "scale(1)",
-        zIndex: 1,
+        boxShadow: '0 0 10px 10px #000',
+        transform: 'scale(1)',
+        zIndex: 1
       }}
     >
       <Box
@@ -37,9 +37,9 @@ export function Card({ image, title }: CardProps) {
         padding={5}
         bg="rgba(0, 0,0, 0.3)"
         transition="0.2s"
-        _hover={{ bg: "rgba(0, 0,0, 0)" }}
+        _hover={{ bg: 'rgba(0, 0,0, 0)' }}
       >
-        <Link href={`/${title}`} passHref>
+        <Link href={`/films/${id}`} passHref>
           <Flex as="button">
             <Icon
               as={BsPlayFill}
@@ -49,7 +49,7 @@ export function Card({ image, title }: CardProps) {
               textShadow="0 0 10px 10px #000"
               opacity={0.2}
               _hover={{
-                opacity: 1,
+                opacity: 1
               }}
             />
           </Flex>

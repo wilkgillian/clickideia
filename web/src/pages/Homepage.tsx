@@ -1,11 +1,11 @@
-import { Box, Flex, Spinner } from "@chakra-ui/react";
-import CarouselDestak from "../components/Carousel/CarouselDestak";
-import { CarouselFilms } from "../components/Carousel/CarouselFilms";
-import { Footer } from "../components/Footer";
-import Header from "../components/Header";
-import { useFilms } from "../hooks/useFilms";
+import { Box, Flex, Spinner } from '@chakra-ui/react';
+import CarouselDestak from '../components/Carousel/CarouselDestak';
+import { CarouselFilms } from '../components/Carousel/CarouselFilms';
+import { Footer } from '../components/Footer';
+import Header from '../components/Header';
+import { useFilms } from '../hooks/useFilms';
 
-export default function Home() {
+export default function HomePage() {
   const { loading } = useFilms();
   return (
     <>
