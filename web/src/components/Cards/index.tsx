@@ -39,7 +39,7 @@ export function Card({ image, id }: CardProps) {
         transition="0.2s"
         _hover={{ bg: 'rgba(0, 0,0, 0)' }}
       >
-        <Link href={`/films/${id}`} passHref>
+        <Link href={`/films/film/${id}`} passHref>
           <Flex as="button">
             <Icon
               as={BsPlayFill}

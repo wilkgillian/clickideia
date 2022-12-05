@@ -165,4 +165,12 @@ export class FilmRepository implements IFilmsRepository {
       })
       .execute();
   }
+  async getOneFilm(id: string){
+    const film = await this.films.findOne({
+      where: {
+        id: id
+      }
+    })
+    return film
+  }
 }
