@@ -51,14 +51,19 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
 export const getStaticProps: GetStaticProps = async context => {
-  // const { slug } = context.params;
-  const { data } = await api.get("/films");
-  const films = data.map((film: FilmProps) => ({
+  const { slug } = context.params;
+  const response = await api.get("/films/film", {
+    data: {
+    id: slug
+  }
+}
+);
+  const film = data.map((film: FilmProps) => ({
     slug: film.id,
     id: film.id,
     title: film.title,
@@ -73,6 +78,6 @@ export const getStaticProps: GetStaticProps = async context => {
     genre: film.genre,
   }));
   return {
-    props: { films },
+    props: { film },
   };
 };
