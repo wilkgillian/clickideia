@@ -1,5 +1,9 @@
 import { ICreateFilmDTO } from "../dtos/ICreateFilmDTO";
-import { IUpdateFilmDTO, IUpdateMovieBanner } from "../dtos/IUpdateFilmDTO";
+import {
+  IUpdateFilmDTO,
+  IUpdateMovieBanner,
+  IUpdateMovieImage,
+} from "../dtos/IUpdateFilmDTO";
 import { Film } from "../infra/typeorm/entities/Film";
 export interface IFilmsRepository {
   create(data: ICreateFilmDTO): Promise<Film>;
@@ -10,4 +14,5 @@ export interface IFilmsRepository {
   getOneFilm(id: string): Promise<Film>;
   update(data: IUpdateFilmDTO, id: string): Promise<Film>;
   updateMovieBanner({ id, movie_banner }: IUpdateMovieBanner): Promise<void>;
+  updateFilmImage({ id, image }: IUpdateMovieImage): Promise<void>;
 }

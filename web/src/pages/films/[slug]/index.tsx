@@ -6,12 +6,11 @@ import {
   HStack,
   Divider,
   Flex,
-  Button
-} from '@chakra-ui/react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { BsPlayFill } from 'react-icons/bs';
-import CardInfo from '../../../components/Cards/Infos';
-import { api } from '../../../services/api';
+} from "@chakra-ui/react";
+import { GetStaticPaths, GetStaticProps } from "next";
+import CardInfo from "../../../components/Cards/Infos";
+import ModalVideo from "../../../components/ModalVideo";
+import { api } from "../../../services/api";
 
 interface FilmProps {
   id: string;
@@ -20,6 +19,7 @@ interface FilmProps {
   image: string;
   genre: string;
   movie_banner: string;
+  movie_url: string;
   direction: string;
   producer: string;
   running_time: string;
@@ -39,7 +39,6 @@ export default function Film({ film }: Film) {
       backgroundPosition="top center"
       backgroundRepeat="no-repeat"
       backgroundSize="cover"
-      display="flex"
     >
       <HStack
         width="100%"
@@ -48,8 +47,7 @@ export default function Film({ film }: Film) {
         display="flex"
         transition="0.2s"
         _hover={{
-          backdropFilter: 'blur(5px) saturate(100%)'
-          // backdropFilter: 'none'
+          backdropFilter: "blur(5px) saturate(100%)",
         }}
         padding={10}
       >
@@ -79,22 +77,18 @@ export default function Film({ film }: Film) {
             <CardInfo text={film.release_date} />
           </Flex>
           <Flex w="100%" gap={4}>
-            <Button
-              colorScheme="none"
-              padding={0}
-              bgColor="rgba(0, 255, 255, 0.3)"
-              w={70}
-              h={70}
-              transform="scale(0.9)"
-              _hover={{
-                transform: 'scale(1)'
-              }}
-              borderRadius={50}
-              boxShadow="0 0 10px 5px #000"
-              fontSize={50}
-            >
-              <BsPlayFill color="#000" />
-            </Button>
+            <ModalVideo title={film.title}>
+              <Box
+                as="video"
+                w="100%"
+                h="100%"
+                autoPlay
+                controls
+                controlsList="nodownload"
+              >
+                <source src={film.movie_url} type="video/mp4" />
+              </Box>
+            </ModalVideo>
           </Flex>
         </VStack>
       </HStack>
@@ -103,24 +97,24 @@ export default function Film({ film }: Film) {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { data } = await api.get('/films');
+  const { data } = await api.get("/films");
   const paths = data.map((film: FilmProps) => ({
     params: {
-      slug: film.id
-    }
+      slug: film.id,
+    },
   }));
 
   return {
     paths,
-    fallback: true
+    fallback: true,
   };
 };
 
-export const getStaticProps: GetStaticProps = async context => {
-  const response = await api.get('/films/film', {
+export const getStaticProps: GetStaticProps = async (context) => {
+  const response = await api.get("/films/film", {
     data: {
-      id: context.params?.slug
-    }
+      id: context.params?.slug,
+    },
   });
   const film = {
     slug: response.data.id,
@@ -129,14 +123,15 @@ export const getStaticProps: GetStaticProps = async context => {
     description: response.data.description,
     image: response.data.image,
     movie_banner: response.data.movie_banner,
+    movie_url: response.data.movie_url,
     director: response.data.director,
     producer: response.data.producer,
     running_time: response.data.running_time,
     rt_score: response.data.rt_score,
     release_date: response.data.release_date,
-    genre: response.data.genre
+    genre: response.data.genre,
   };
   return {
-    props: { film }
+    props: { film },
   };
 };

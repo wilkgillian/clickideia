@@ -5,6 +5,7 @@ export interface ICreateFilmDTO {
   created_at?: string;
   image: string;
   movie_banner?: string;
+  movie_url?: string;
   director: string;
   producer: string;
   release_date: number;

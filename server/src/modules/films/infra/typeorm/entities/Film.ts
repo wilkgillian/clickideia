@@ -22,6 +22,9 @@ export class Film {
   movie_banner: string;
 
   @Column()
+  movie_url: string;
+
+  @Column()
   director: string;
 
   @Column()
@@ -35,7 +38,7 @@ export class Film {
 
   @Column()
   rt_score: number;
-  
+
   @Column()
   genre: string;
 

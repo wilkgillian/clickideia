@@ -9,9 +9,10 @@ export class CreateFilmController {
       title,
       description,
       director,
+      image,
+      movie_banner,
       producer,
       release_date,
-      movie_banner,
       rt_score,
       running_time,
       genre,
@@ -19,12 +20,13 @@ export class CreateFilmController {
 
     const createFilmUseCase = container.resolve(CreateFilmUseCase);
 
-    const image_url = await uploadImageOnS3(req);
+    const movie_url = await uploadImageOnS3(req);
     const film = await createFilmUseCase.execute({
       title,
       description,
-      image: image_url,
+      image,
       movie_banner,
+      movie_url: movie_url,
       director,
       producer,
       release_date,

@@ -1,68 +1,73 @@
-import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateFilms1669043789353 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'films',
+        name: "films",
         columns: [
           {
-            name: 'id',
-            type: 'uuid',
-            isPrimary: true
+            name: "id",
+            type: "uuid",
+            isPrimary: true,
           },
           {
-            name: 'title',
-            type: 'varchar'
+            name: "title",
+            type: "varchar",
           },
           {
-            name: 'description',
-            type: 'varchar'
+            name: "description",
+            type: "varchar",
           },
           {
-            name: 'created_at',
-            type: 'timestamp',
-            default: 'now()'
+            name: "created_at",
+            type: "timestamp",
+            default: "now()",
           },
           {
-            name: 'image',
-            type: 'varchar'
+            name: "movie_url",
+            type: "varchar",
           },
           {
-            name: 'movie_banner',
-            type: 'varchar',
-            isNullable: true
+            name: "image",
+            type: "varchar",
+            isNullable: true,
           },
           {
-            name: 'director',
-            type: 'varchar'
+            name: "movie_banner",
+            type: "varchar",
+            isNullable: true,
           },
           {
-            name: 'producer',
-            type: 'varchar'
+            name: "director",
+            type: "varchar",
           },
           {
-            name: 'release_date',
-            type: 'int'
+            name: "producer",
+            type: "varchar",
           },
           {
-            name: 'running_time',
-            type: 'int'
+            name: "release_date",
+            type: "int",
           },
           {
-            name: 'rt_score',
-            type: 'int'
+            name: "running_time",
+            type: "int",
           },
           {
-            name: 'genre',
-            type: 'varchar'
-          }
-        ]
+            name: "rt_score",
+            type: "int",
+          },
+          {
+            name: "genre",
+            type: "varchar",
+          },
+        ],
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('films');
+    await queryRunner.dropTable("films");
   }
 }

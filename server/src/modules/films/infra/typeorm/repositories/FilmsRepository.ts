@@ -8,6 +8,7 @@ import { api } from "../../../services/api";
 import {
   IUpdateFilmDTO,
   IUpdateMovieBanner,
+  IUpdateMovieImage,
 } from "../../../dtos/IUpdateFilmDTO";
 
 export class FilmRepository implements IFilmsRepository {
@@ -22,6 +23,7 @@ export class FilmRepository implements IFilmsRepository {
     description,
     image,
     movie_banner,
+    movie_url,
     director,
     producer,
     release_date,
@@ -34,6 +36,7 @@ export class FilmRepository implements IFilmsRepository {
       description,
       image,
       movie_banner,
+      movie_url,
       director,
       producer,
       release_date,
@@ -57,6 +60,8 @@ export class FilmRepository implements IFilmsRepository {
           description: dat.description,
           image: dat.image,
           movie_banner: dat.movie_banner,
+          movie_url:
+            "https://www.youtube.com/watch?v=Y9TL_43X3Lc&ab_channel=FullStackMastery",
           director: dat.director,
           producer: dat.producer,
           release_date: dat.release_date,
@@ -127,6 +132,7 @@ export class FilmRepository implements IFilmsRepository {
           movie_banner: data.movie_banner
             ? data.movie_banner
             : existentData.movie_banner,
+          movie_url: data.movie_url ? data.movie_url : existentData.movie_url,
           release_date: data.release_date
             ? data.release_date
             : existentData.release_date,
@@ -165,12 +171,24 @@ export class FilmRepository implements IFilmsRepository {
       })
       .execute();
   }
-  async getOneFilm(id: string){
+  async updateFilmImage({ id, image }: IUpdateMovieImage): Promise<void> {
+    await this.films
+      .createQueryBuilder()
+      .update(Film)
+      .set({
+        image: image,
+      })
+      .where({
+        id: id,
+      })
+      .execute();
+  }
+  async getOneFilm(id: string) {
     const film = await this.films.findOne({
       where: {
-        id: id
-      }
-    })
-    return film
+        id: id,
+      },
+    });
+    return film;
   }
 }

@@ -5,6 +5,7 @@ export interface IUpdateFilmDTO {
   created_at?: string;
   image?: string;
   movie_banner?: string;
+  movie_url?: string;
   director?: string;
   producer?: string;
   release_date?: number;
@@ -16,4 +17,8 @@ export interface IUpdateFilmDTO {
 export interface IUpdateMovieBanner {
   id: string;
   movie_banner: string;
+}
+export interface IUpdateMovieImage {
+  id: string;
+  image: string;
 }
