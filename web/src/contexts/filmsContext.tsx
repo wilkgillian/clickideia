@@ -3,9 +3,9 @@ import {
   ReactNode,
   useContext,
   useEffect,
-  useState,
-} from "react";
-import { api } from "../services/api";
+  useState
+} from 'react';
+import { api } from '../services/api';
 
 interface FilmsProviderProps {
   children: ReactNode;
@@ -19,11 +19,16 @@ interface FilmsContextProps {
 interface FilmsProps {
   id: string;
   title: string;
-  subtitle?: string;
+  description: string;
+  producer: string;
+  director: string;
+  duration: number;
+  rt_score: number;
   genre: string;
   movie_banner: string;
   image: string;
-  description: string;
+  running_time: string;
+  release_date: string;
 }
 
 export const FilmsContext = createContext({} as FilmsContextProps);
@@ -33,12 +38,12 @@ export function FilmsProvider({ children }: FilmsProviderProps) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     async function loadData() {
-      const { data } = await api.get("/films");
+      const { data } = await api.get('/films');
       setDados(data);
     }
     loadData();
     setLoading(false);
-  }, dados);
+  }, [dados]);
   return (
     <FilmsContext.Provider value={{ dados, loading }}>
       {children}
