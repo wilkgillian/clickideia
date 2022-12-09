@@ -1,19 +1,19 @@
 import {
-  Button,
   Flex,
   Avatar,
   Input,
   InputGroup,
   InputRightElement,
-  Text
-} from '@chakra-ui/react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { AiOutlineSearch } from 'react-icons/ai';
-import { IoMdNotifications, IoIosArrowDown } from 'react-icons/io';
-import { IoAdd } from 'react-icons/io5';
+  Text,
+  Button,
+} from "@chakra-ui/react";
+import Image from "next/image";
+import Link from "next/link";
+import { AiOutlineSearch } from "react-icons/ai";
+import { IoMdNotifications, IoIosArrowDown } from "react-icons/io";
+import { IoAdd } from "react-icons/io5";
 
-import Logo from '../../../public/assets/logo.svg';
+import Logo from "../../../public/assets/logo.svg";
 
 export default function Header() {
   return (
@@ -42,7 +42,10 @@ export default function Header() {
         </InputRightElement>
       </InputGroup>
       <Flex display="flex" alignItems="center" gap={3}>
-        <IoAdd fontSize={25} />
+        <Link href="/Cadastro" passHref>
+          <IoAdd fontSize={25} cursor="pointer" />
+        </Link>
+        {/* </Button> */}
         <IoMdNotifications fontSize={20} />
         <Avatar ml={5} w={10} h={10} src="https://github.com/wilkgillian.png" />
         <Text>Wilk Gillian</Text>
