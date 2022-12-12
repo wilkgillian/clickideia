@@ -1,7 +1,7 @@
-import { Box, Text, Textarea, VStack, HStack } from "@chakra-ui/react";
-import BgImage from "../../public/assets/bg.jpg";
+import { Box, HStack, Text, VStack, Image } from "@chakra-ui/react";
 import Header from "../components/Header";
-import Input from "../components/Input";
+import CreateFilmModal from "../components/ModalCreateFilm";
+// import Image from '../../public/assets/poster.jpg'
 
 export default function Cadastro() {
   return (
@@ -14,42 +14,42 @@ export default function Cadastro() {
         backgroundPosition="top center"
         backgroundRepeat="no-repeat"
         backgroundSize="cover"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
       >
-        <Text
-          mt={5}
-          textAlign="center"
-          fontSize={102}
-          fontFamily="Road Rage"
-          fontWeight="bold"
-          textShadow="0.1em 0.1em 0.2em #000"
-        >
-          ADICIONE SEU FILME
-        </Text>
-        <Box
-          margin="auto"
-          w="70%"
-          bgColor="#3e3b4959"
-          borderRadius={16}
+        <HStack
+          w="60%"
+          bg="rgba(0, 0, 0, 0.2)"
           boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-          backdropFilter="blur(15px)"
-          border="1px solid rgba(54, 54, 56, 0.7)"
+          backdropFilter="blur(5px)"
+          border="3px solid rgba(255, 255, 255, 0.3)"
+          alignItems="center"
+          borderRadius={20}
+          overflow="hidden"
+          padding={10}
         >
-          <VStack padding="4rem 10rem" as="form">
-            <Input type="text" placeholder="Titulo do filme" />
-            <Input type="text" placeholder="Genero" />
-            <Input type="text" placeholder="Diretor" />
-            <Input type="text" placeholder="Produtor" />
-            <Input type="number" placeholder="Ano de lançamento" />
-            <Input type="number" placeholder="Nota de avaliação" />
-            <Input type="number" placeholder="Duração" />
-            <HStack w="100%" gap={4}>
-              <Input type="file" placeholder="Banner do filme" />
-              <Input type="file" placeholder="Poster do filme" />
-            </HStack>
-            <Input type="file" placeholder="Arquivo do filme" />
-            <Textarea placeholder="Sinopse do filme" />
+          <VStack gap={4}>
+            <Text
+              fontSize={24}
+              fontWeight="bold"
+              textAlign="center"
+              textShadow="0.1em 0.1em 0.2em #000"
+              mb={4}
+            >
+              Nosso cátalogo conta com mais de 15k filmes e séries, mas você
+              ainda por de adicionar o seu clicando no botão abaixo.
+            </Text>
+            <CreateFilmModal />
           </VStack>
-        </Box>
+
+          <Image
+            src="assets/poster.jpg"
+            alt="poster.jpg"
+            width={300}
+            borderRadius={10}
+          />
+        </HStack>
       </Box>
     </>
   );
