@@ -20,9 +20,7 @@ export default function Cadastro() {
       >
         <HStack
           w="60%"
-          bg="rgba(0, 0, 0, 0.2)"
-          boxShadow="0 4px 30px rgba(0, 0, 0, 0.1)"
-          backdropFilter="blur(5px)"
+          bg="gray.800"
           border="3px solid rgba(255, 255, 255, 0.3)"
           alignItems="center"
           borderRadius={20}
