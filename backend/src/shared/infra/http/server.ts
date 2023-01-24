@@ -8,7 +8,7 @@ import { router } from './routes';
 import swaggerFile from '../../../swagger.json';
 import { createConnection } from '../typeorm';
 
-createConnection('clickideia');
+createConnection('db_clickideia');
 
 const app = express();
 

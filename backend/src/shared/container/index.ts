@@ -1,8 +1,8 @@
 import { container } from 'tsyringe';
-import { ToDoRepository } from '../../modules/toDos/infra/typeorm/repositories/ToDosRepository';
-import { IToDosRepository } from '../../modules/toDos/repositories/IToDosRepository';
+import { CardRepository } from '../../modules/toDos/infra/typeorm/repositories/CardsRepository';
+import { ICardsRepository } from '../../modules/toDos/repositories/ICardsRepository';
 
-container.registerSingleton<IToDosRepository>(
-  'ToDosRepository',
-  ToDoRepository,
+container.registerSingleton<ICardsRepository>(
+  'CardsRepository',
+  CardRepository,
 );

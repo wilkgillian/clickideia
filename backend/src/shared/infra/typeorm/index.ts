@@ -1,6 +1,6 @@
+import { CardsTable1674570326636 } from './migrations/1674570326636-CardsTable';
 import { DataSource } from 'typeorm';
-import { CreateFilms1669043789353 } from './migrations/1669043789353-CreateFilms';
-import { ToDo } from '../../../modules/toDos/infra/typeorm/entities/ToDo';
+import { Card } from '../../../modules/toDos/infra/typeorm/entities/Card';
 
 const myDataSource = new DataSource({
   type: 'postgres',
@@ -8,13 +8,13 @@ const myDataSource = new DataSource({
   host: 'localhost',
   username: 'docker',
   password: 'wilk1998',
-  database: 'clickideia',
-  entities: [ToDo],
-  migrations: [CreateFilms1669043789353],
+  database: 'db_clickideia',
+  entities: [Card],
+  migrations: [CardsTable1674570326636],
 });
 
 export async function createConnection(
-  host = 'clickideia',
+  host = 'db_clickideia',
 ): Promise<DataSource> {
   return await myDataSource.setOptions({ host }).initialize();
 }

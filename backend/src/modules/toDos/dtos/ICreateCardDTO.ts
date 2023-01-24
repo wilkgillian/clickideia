@@ -1,4 +1,4 @@
-export interface ICreateToDoDTO {
+export interface ICreateCardDTO {
   id?: string;
   title: string;
   content: string;

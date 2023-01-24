@@ -1,22 +1,22 @@
 import { Router } from 'express';
-import { CreateToDoController } from '../../../../modules/toDos/useCases/createToDo/CreateToDoController';
-import { ListToDosController } from '../../../../modules/toDos/useCases/listToDo/listToDoController';
-import { GetOneToDoController } from '../../../../modules/toDos/useCases/getOneToDo/GetOneToDoController';
-import { UpdateToDoController } from '../../../../modules/toDos/useCases/updateToDoUseCase/UpdateToDoController';
-import { DeleteToDoController } from '../../../../modules/toDos/useCases/deleteToDoUseCase/DeleteToDoController';
+import { CreateCardController } from '../../../../modules/toDos/useCases/createCard/CreateCardController';
+import { ListCardsController } from '../../../../modules/toDos/useCases/listCard/listCardController';
+import { GetOneCardController } from '../../../../modules/toDos/useCases/getOneCard/GetOneCardController';
+import { UpdateCardController } from '../../../../modules/toDos/useCases/updateCardUseCase/UpdateCardController';
+import { DeleteCardController } from '../../../../modules/toDos/useCases/deleteCardUseCase/DeleteCardController';
 
 const cardsRoutes = Router();
 
-const createToDoController = new CreateToDoController();
-const listToDosController = new ListToDosController();
-const getOneToDoController = new GetOneToDoController();
-const updateToDoController = new UpdateToDoController();
-const deleteToDoController = new DeleteToDoController();
+const createCardController = new CreateCardController();
+const listCardsController = new ListCardsController();
+const getOneCardController = new GetOneCardController();
+const updateCardController = new UpdateCardController();
+const deleteCardController = new DeleteCardController();
 
-cardsRoutes.get('/toDo', getOneToDoController.handle);
-cardsRoutes.get('/', listToDosController.handle);
-cardsRoutes.delete('/', deleteToDoController.handle);
-cardsRoutes.put('/', updateToDoController.handle);
-cardsRoutes.post('/', createToDoController.handle);
+cardsRoutes.get('/card', getOneCardController.handle);
+cardsRoutes.get('/', listCardsController.handle);
+cardsRoutes.delete('/', deleteCardController.handle);
+cardsRoutes.put('/', updateCardController.handle);
+cardsRoutes.post('/', createCardController.handle);
 
 export { cardsRoutes };
