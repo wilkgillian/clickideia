@@ -3,6 +3,6 @@ export interface ICreateUserDTO {
   username: string;
   email: string;
   password: string;
-  isAdmin: boolean;
-  created_at: Date;
+  isAdmin?: boolean;
+  created_at?: Date;
 }
