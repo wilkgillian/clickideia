@@ -5,29 +5,63 @@ import { v4 as uuidV4 } from 'uuid';
 import { ITasksRepository } from '../ITasksRepository';
 import { Task } from '../../entities/Task';
 import { IUpdateTaskDTO } from '../../../../dtos/IUpdateTaskDTO';
+import { User } from '../../../../../accounts/entities/User';
 
 export class TaskRepository implements ITasksRepository {
   private tasks: Repository<Task>;
+  private users: Repository<User>;
 
   constructor() {
     this.tasks = myDataSource.getRepository(Task);
+    this.users = myDataSource.getRepository(User);
   }
 
-  async create({ title, content, list }: ICreateTaskDTO): Promise<Task> {
-    const task = this.tasks.create({
-      id: uuidV4(),
-      title: title,
-      content: content,
-      list: list,
-      created_at: new Date(),
-      status: 'to_do',
+  async create({
+    title,
+    content,
+    list,
+    userId,
+    status,
+  }: ICreateTaskDTO): Promise<Task> {
+    const user = await this.users.findOne({
+      where: {
+        id: userId,
+      },
     });
 
-    await this.tasks.save(task);
+    if (user.id === userId) {
+      const task = this.tasks.create({
+        id: uuidV4(),
+        title: title,
+        content: content,
+        list: list,
+        status: status,
+      });
 
-    return task;
+      await this.users
+        .createQueryBuilder()
+        .update(User)
+        .set({
+          tasks: task.id,
+        })
+        // .where({
+        //   id: task.userId,
+        // })
+        .execute();
+      await this.tasks.save(task);
+
+      return task;
+    }
   }
 
+  async findByName(title: string): Promise<Task> {
+    const task = await this.tasks.findOne({
+      where: {
+        title: title,
+      },
+    });
+    return task;
+  }
   async list(): Promise<Task[]> {
     try {
       const tasks = await this.tasks.find({
@@ -39,14 +73,6 @@ export class TaskRepository implements ITasksRepository {
     } catch {
       throw new Error('Falha ao obter dados');
     }
-  }
-  async findByName(title: string): Promise<Task> {
-    const task = await this.tasks.findOne({
-      where: {
-        title: title,
-      },
-    });
-    return task;
   }
   async delete(id: string): Promise<string> {
     try {

@@ -3,6 +3,7 @@ import { DataSource } from 'typeorm';
 import { Task } from '../../../modules/tasks/infra/typeorm/entities/Task';
 import { StatusTable1674591173987 } from './migrations/1674591173987-StatusTable';
 import { UsersTable1674591227589 } from './migrations/1674591227589-UsersTable';
+import { User } from '../../../modules/accounts/entities/User';
 
 const myDataSource = new DataSource({
   type: 'postgres',
@@ -11,11 +12,13 @@ const myDataSource = new DataSource({
   username: 'docker',
   password: 'wilk1998',
   database: 'db_clickideia',
-  entities: [Task],
+  synchronize: true,
+  // logging: true,
+  entities: [Task, User],
   migrations: [
     TasksTable1674570326636,
     StatusTable1674591173987,
-    UsersTable1674591227589,
+    // UsersTable1674591227589,
   ],
 });
 

@@ -39,7 +39,7 @@ export class UsersTable1674591227589 implements MigrationInterface {
           },
           {
             name: 'tasks',
-            type: 'array',
+            type: 'varchar[]',
             isNullable: true,
           },
         ],

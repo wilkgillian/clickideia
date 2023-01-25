@@ -4,7 +4,7 @@ import { CreateTaskUseCase } from './CreateTaskUseCase';
 
 export class CreateTaskController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { title, content, list, status } = req.body;
+    const { title, content, list, status, userId } = req.body;
 
     const createTaskUseCase = container.resolve(CreateTaskUseCase);
 
@@ -14,6 +14,7 @@ export class CreateTaskController {
         content,
         list,
         status,
+        userId,
       },
       res,
     );

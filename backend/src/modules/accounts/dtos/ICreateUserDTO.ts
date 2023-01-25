@@ -1,3 +1,5 @@
+import { Task } from '../../tasks/infra/typeorm/entities/Task';
+
 export interface ICreateUserDTO {
   name: string;
   username: string;
@@ -5,4 +7,5 @@ export interface ICreateUserDTO {
   password: string;
   isAdmin?: boolean;
   created_at?: Date;
+  tasks?: Task[];
 }

@@ -1,5 +1,14 @@
 import { v4 as uuidV4 } from 'uuid';
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinTable,
+  ManyToOne,
+  OneToMany,
+  PrimaryColumn,
+} from 'typeorm';
+import { User } from '../../../../accounts/entities/User';
 
 @Entity('tasks')
 export class Task {
@@ -15,15 +24,24 @@ export class Task {
   @Column()
   list: string;
 
+  @Column()
+  status: 'making' | 'to_do' | 'completed' | 'to_define';
+
   @CreateDateColumn()
   created_at: Date;
 
-  @Column()
-  status: string;
+  // @ManyToOne(type => User, user => user.tasks)
+  // userId: User;
+
+  @OneToMany(type => User, user => user.tasks)
+  userId: string;
 
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
+    }
+    if (!this.status) {
+      this.status = 'to_do';
     }
   }
 }

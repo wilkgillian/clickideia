@@ -4,4 +4,5 @@ export interface ICreateTaskDTO {
   content: string;
   list: string;
   status: 'completed' | 'to_do' | 'to_define' | 'making';
+  userId: string;
 }

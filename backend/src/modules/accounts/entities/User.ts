@@ -2,8 +2,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
+  ManyToOne,
+  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 import { v4 as uuidV4 } from 'uuid';
@@ -29,9 +29,9 @@ class User {
   @Column()
   isAdmin: boolean;
 
-  @ManyToMany(type => Task, { eager: true })
-  @JoinTable()
-  tasks: Task[];
+  @ManyToOne(type => Task, task => task.userId)
+  // @JoinTable()
+  tasks: string;
 
   @CreateDateColumn()
   created_at: Date;
@@ -39,6 +39,9 @@ class User {
   constructor() {
     if (!this.id) {
       this.id = uuidV4();
+    }
+    if (!this.isAdmin) {
+      this.isAdmin = false;
     }
   }
 }

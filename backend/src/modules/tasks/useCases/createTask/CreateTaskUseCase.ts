@@ -12,7 +12,7 @@ export class CreateTaskUseCase {
   ) {}
 
   async execute(
-    { title, content, list }: ICreateTaskDTO,
+    { title, content, list, userId, status }: ICreateTaskDTO,
     res: Response,
   ): Promise<Task | Response> {
     const taskAlreadyExists = await this.repository.findByName(title);
@@ -24,7 +24,8 @@ export class CreateTaskUseCase {
       title,
       content,
       list,
-      status: 'to_do',
+      status,
+      userId,
     });
     return task;
   }
