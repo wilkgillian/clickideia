@@ -3,9 +3,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
+  JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryColumn,
 } from 'typeorm';
 import { User } from '../../../../accounts/entities/User';
@@ -30,10 +29,11 @@ export class Task {
   @CreateDateColumn()
   created_at: Date;
 
-  // @ManyToOne(type => User, user => user.tasks)
-  // userId: User;
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'userId' })
+  user: User;
 
-  @OneToMany(type => User, user => user.tasks)
+  @Column()
   userId: string;
 
   constructor() {

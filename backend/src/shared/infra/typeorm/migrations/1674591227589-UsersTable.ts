@@ -9,6 +9,8 @@ export class UsersTable1674591227589 implements MigrationInterface {
           {
             name: 'id',
             type: 'uuid',
+            isUnique: true,
+            isNullable: false
           },
           {
             name: 'name',
@@ -36,11 +38,6 @@ export class UsersTable1674591227589 implements MigrationInterface {
             name: 'created_at',
             type: 'timestamp',
             default: 'now()',
-          },
-          {
-            name: 'tasks',
-            type: 'varchar[]',
-            isNullable: true,
           },
         ],
       }),

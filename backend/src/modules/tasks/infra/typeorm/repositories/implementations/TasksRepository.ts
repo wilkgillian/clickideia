@@ -36,18 +36,8 @@ export class TaskRepository implements ITasksRepository {
         content: content,
         list: list,
         status: status,
+        userId: userId,
       });
-
-      await this.users
-        .createQueryBuilder()
-        .update(User)
-        .set({
-          tasks: task.id,
-        })
-        // .where({
-        //   id: task.userId,
-        // })
-        .execute();
       await this.tasks.save(task);
 
       return task;

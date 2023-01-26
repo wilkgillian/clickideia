@@ -16,9 +16,9 @@ const myDataSource = new DataSource({
   // logging: true,
   entities: [Task, User],
   migrations: [
+    UsersTable1674591227589,
     TasksTable1674570326636,
-    StatusTable1674591173987,
-    // UsersTable1674591227589,
+    // StatusTable1674591173987,
   ],
 });
 
