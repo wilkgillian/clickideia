@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { CreateTaskController } from '../../../../modules/tasks/useCases/createTask/CreateTaskController';
-import { DeleteTaskController } from '../../../../modules/tasks/useCases/deleteTask/DeleteTaskController';
-import { GetOneTaskController } from '../../../../modules/tasks/useCases/getOneTask/GetOneTaskController';
-import { ListTasksController } from '../../../../modules/tasks/useCases/listTask/listTaskController';
-import { UpdateTaskController } from '../../../../modules/tasks/useCases/updateTask/UpdateTaskController';
+import { CreateTaskController } from '../modules/tasks/useCases/createTask/CreateTaskController';
+import { DeleteTaskController } from '../modules/tasks/useCases/deleteTask/DeleteTaskController';
+import { GetOneTaskController } from '../modules/tasks/useCases/getOneTask/GetOneTaskController';
+import { ListTasksController } from '../modules/tasks/useCases/listTask/listTaskController';
+import { UpdateTaskController } from '../modules/tasks/useCases/updateTask/UpdateTaskController';
 
 const cardsRoutes = Router();
 
