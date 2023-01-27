@@ -44,10 +44,11 @@ export class TaskRepository implements ITasksRepository {
     }
   }
 
-  async findByName(title: string): Promise<Task> {
+  async findByName(title: string, userId: string): Promise<Task> {
     const task = await this.tasks.findOne({
       where: {
         title: title,
+        userId: userId,
       },
     });
     return task;
@@ -78,12 +79,6 @@ export class TaskRepository implements ITasksRepository {
     }
   }
   async update(data: IUpdateTaskDTO, id: string): Promise<Task> {
-    // try {
-    //   const existentData = await this.tasks.findOne({
-    //     where: {
-    //       id: id,
-    //     },
-    //   });
     await this.tasks
       .createQueryBuilder()
       .update(Task)
@@ -104,37 +99,15 @@ export class TaskRepository implements ITasksRepository {
       },
     });
     return task;
-    // } catch {
-    //   throw new Error("Erro ao editar toDo");
-    // }
   }
-  // async updateMovieBanner({
-  //   id,
-  //   movie_banner,
-  // }: IUpdateMovieBanner): Promise<void> {
-  //   await this.tasks
-  //     .createQueryBuilder()
-  //     .update(Film)
-  //     .set({
-  //       movie_banner: movie_banner,
-  //     })
-  //     .where({
-  //       id: id,
-  //     })
-  //     .execute();
-  // }
-  // async updateFilmImage({ id, image }: IUpdateMovieImage): Promise<void> {
-  //   await this.toDos
-  //     .createQueryBuilder()
-  //     .update(Film)
-  //     .set({
-  //       image: image,
-  //     })
-  //     .where({
-  //       id: id,
-  //     })
-  //     .execute();
-  // }
+  async listTasksByUser(userId: string): Promise<Task[]> {
+    const tasks = await this.tasks.find({
+      where: {
+        userId: userId,
+      },
+    });
+    return tasks;
+  }
   async getOneTask(id: string) {
     const task = await this.tasks.findOne({
       where: {
