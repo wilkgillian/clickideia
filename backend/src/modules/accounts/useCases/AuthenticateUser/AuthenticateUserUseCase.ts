@@ -5,14 +5,13 @@ import { sign } from 'jsonwebtoken';
 import { AppError } from '../../../../errors/AppErrors';
 
 interface IRequest {
-  email: string;
+  username: string;
   password: string;
 }
 
 interface IResponse {
   user: {
     name: string;
-    email: string;
     username: string;
   };
   token: string;
@@ -24,8 +23,8 @@ class AuthenticateUserUseCase {
     private usersRespository: IUsersRepository,
   ) {}
 
-  async execute({ email, password }: IRequest): Promise<IResponse> {
-    const user = await this.usersRespository.findByEmail(email);
+  async execute({ username, password }: IRequest): Promise<IResponse> {
+    const user = await this.usersRespository.findByUsername(username);
 
     if (!user) {
       throw new AppError('Email or password incorrect!');
@@ -43,7 +42,6 @@ class AuthenticateUserUseCase {
       token,
       user: {
         name: user.name,
-        email: user.email,
         username: user.username,
       },
     };
