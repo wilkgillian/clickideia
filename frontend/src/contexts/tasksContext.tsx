@@ -7,16 +7,16 @@ import {
 } from 'react';
 import { api } from '../services/api';
 
-interface FilmsProviderProps {
+interface TasksProviderProps {
   children: ReactNode;
 }
 
-interface FilmsContextProps {
-  dados: FilmsProps[];
+interface TasksContextProps {
+  dados: TasksProps[];
   loading: boolean;
 }
 
-interface FilmsProps {
+interface TasksProps {
   id: string;
   title: string;
   description: string;
@@ -31,9 +31,9 @@ interface FilmsProps {
   release_date: string;
 }
 
-export const FilmsContext = createContext({} as FilmsContextProps);
+export const TasksContext = createContext({} as TasksContextProps);
 
-export function FilmsProvider({ children }: FilmsProviderProps) {
+export function TasksProvider({ children }: TasksProviderProps) {
   const [dados, setDados] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -45,10 +45,10 @@ export function FilmsProvider({ children }: FilmsProviderProps) {
     setLoading(false);
   }, [dados]);
   return (
-    <FilmsContext.Provider value={{ dados, loading }}>
+    <TasksContext.Provider value={{ dados, loading }}>
       {children}
-    </FilmsContext.Provider>
+    </TasksContext.Provider>
   );
 }
 
-export const useSidebarDrawer = () => useContext(FilmsContext);
+export const useSidebarDrawer = () => useContext(TasksContext);

@@ -1,6 +1,7 @@
 import { Box, VStack, Text } from '@chakra-ui/react';
 import React from 'react';
 import Header from '../Header';
+import Dashboard from '../Dashboard';
 import Sidebar from '../Sidebar';
 
 function Layout() {
@@ -9,8 +10,7 @@ function Layout() {
       <Sidebar />
       <VStack w="full">
         <Header />
-        <Text>Box</Text>
-        {/* <Dashboard /> */}
+        <Dashboard />
       </VStack>
     </Box>
   );
