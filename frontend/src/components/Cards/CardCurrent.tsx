@@ -8,11 +8,11 @@ function CardCurrent({ cardContent }: CardCurrentProps) {
   return (
     <Box
       w="full"
-      h="auto"
+      h="full"
       borderRadius={5}
       bg="gray.800"
       p={5}
-      maxH={100}
+      maxH={150}
       overflowY="auto"
       css={{
         '&::-webkit-scrollbar': {

@@ -7,37 +7,36 @@ import {
   Icon,
   InputGroup,
   InputLeftElement,
-  InputRightElement
-} from '@chakra-ui/react';
+  InputRightElement,
+} from "@chakra-ui/react";
 import {
   AiOutlineGoogle,
   AiFillFacebook,
   AiOutlineUser,
-  AiOutlineKey
-} from 'react-icons/ai';
-import { MdVisibility } from 'react-icons/md';
-import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
+  AiOutlineKey,
+} from "react-icons/ai";
+import { MdVisibility } from "react-icons/md";
+import { FormEvent, useState } from "react";
+import { useUser } from "../../hooks/useUser";
 
 export function Login() {
+  const { handleSignInUser } = useUser();
   const [show, setShow] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   function handleClick() {
     setShow(!show);
   }
-  function handleAuthenticated(event: FormEvent) {
+  async function handleAuthenticated(event: FormEvent) {
     event.preventDefault();
-    setIsAuthenticated(true);
-    if (isAuthenticated) {
-      router.push('/Homepage');
-    }
+    await handleSignInUser(username, password);
   }
+
   return (
     <>
       <VStack w="full" gap={2}>
         <Button w="full" disabled={true} h={12} gap={4}>
-          <Icon as={AiOutlineGoogle} />{' '}
+          <Icon as={AiOutlineGoogle} />{" "}
           <Text fontWeight="normal">Faça login com o google</Text>
         </Button>
         <Button w="full" disabled={true} h={12} gap={4}>
@@ -49,7 +48,7 @@ export function Login() {
       <Divider orientation="horizontal" />
       <VStack
         as="form"
-        onSubmit={event => handleAuthenticated(event)}
+        onSubmit={(event) => handleAuthenticated(event)}
         spacing={4}
         w="full"
       >
@@ -59,7 +58,13 @@ export function Login() {
             // eslint-disable-next-line react/no-children-prop
             children={<AiOutlineUser />}
           />
-          <Input type="text" placeholder="Nome de usuario" />
+          <Input
+            required
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Nome de usuario"
+          />
         </InputGroup>
         <InputGroup>
           <InputLeftElement
@@ -67,7 +72,13 @@ export function Login() {
             // eslint-disable-next-line react/no-children-prop
             children={<AiOutlineKey />}
           />
-          <Input type={show ? 'text' : 'password'} placeholder="Senha" />
+          <Input
+            required
+            type={show ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Senha"
+          />
           <InputRightElement>
             <Icon as={MdVisibility} onClick={handleClick} />
           </InputRightElement>

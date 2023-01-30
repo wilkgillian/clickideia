@@ -2,7 +2,7 @@ import Layout from '../components/Layout';
 import { useTasks } from '../hooks/useTasks';
 
 export default function HomePage() {
-  const { loading } = useTasks();
+  // const { loading } = useTasks();
   return (
     <>
       {/* <Header />

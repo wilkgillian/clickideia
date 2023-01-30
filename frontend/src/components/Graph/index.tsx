@@ -47,7 +47,7 @@ function Graph() {
       borderRadius={5}
       bg="gray.800"
       p={5}
-      maxH={200}
+      maxH={500}
       overflowY="auto"
       css={{
         '&::-webkit-scrollbar': {

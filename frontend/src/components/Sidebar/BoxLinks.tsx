@@ -1,6 +1,6 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
-import { ElementType } from 'react';
-import NavLinks from './NavLinks';
+import { Box, Text, VStack } from "@chakra-ui/react";
+import { ElementType } from "react";
+import NavLinks from "./NavLinks";
 
 interface BoxLinksProps {
   title: string;
@@ -21,15 +21,13 @@ function BoxLinks({ data, title }: BoxLinksProps) {
       </Text>
 
       <VStack w="full" alignItems="left" padding={4}>
-        {data.map(navlink => (
-          <>
-            <NavLinks
-              key={navlink.title}
-              title={navlink.title}
-              icon={navlink.icon}
-              link={navlink.link}
-            />
-          </>
+        {data.map((navlink) => (
+          <NavLinks
+            key={navlink.title}
+            title={navlink.title}
+            icon={navlink.icon}
+            link={navlink.link}
+          />
         ))}
       </VStack>
     </Box>
