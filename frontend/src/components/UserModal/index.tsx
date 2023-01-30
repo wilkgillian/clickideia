@@ -1,15 +1,15 @@
-import { Avatar, Flex, VStack, Text, Button } from "@chakra-ui/react";
-import { useState } from "react";
-import { BiUserCircle } from "react-icons/bi";
-import { GoSignOut } from "react-icons/go";
+import { Avatar, Flex, VStack, Text, Button } from '@chakra-ui/react';
+import { useState } from 'react';
+import { BiUserCircle } from 'react-icons/bi';
+import { GoSignOut } from 'react-icons/go';
 import {
   IoIosArrowDown,
   IoIosClose,
-  IoIosNotificationsOutline,
-} from "react-icons/io";
-import { VscGear } from "react-icons/vsc";
-import UserNavLinks from "./UserNavLinks";
-import { useUser } from "../../hooks/useUser";
+  IoIosNotificationsOutline
+} from 'react-icons/io';
+import { VscGear } from 'react-icons/vsc';
+import UserNavLinks from './UserNavLinks';
+import { useUser } from '../../hooks/useUser';
 
 interface UserModalProps {
   title: string;
@@ -20,20 +20,20 @@ export default function UserModal({ title, username }: UserModalProps) {
   const { handleSignOutUser } = useUser();
   const userNavLinks = [
     {
-      link: "/Homepage",
-      title: "Perfil",
-      icon: BiUserCircle,
+      link: '/Homepage',
+      title: 'Perfil',
+      icon: BiUserCircle
     },
     {
-      link: "/Homepage",
-      title: "Notificações",
-      icon: IoIosNotificationsOutline,
+      link: '/Homepage',
+      title: 'Notificações',
+      icon: IoIosNotificationsOutline
     },
     {
-      link: "/Homepage",
-      title: "Configurações",
-      icon: VscGear,
-    },
+      link: '/Homepage',
+      title: 'Configurações',
+      icon: VscGear
+    }
   ];
   const [open, setOpen] = useState(false);
   return (
@@ -79,7 +79,7 @@ export default function UserModal({ title, username }: UserModalProps) {
           </Text>
 
           <VStack w="100%" padding="2rem 0" gap={2}>
-            {userNavLinks.map((links) => (
+            {userNavLinks.map(links => (
               <UserNavLinks
                 key={links.link}
                 link={links.link}
@@ -91,6 +91,7 @@ export default function UserModal({ title, username }: UserModalProps) {
               colorScheme="none"
               rightIcon={<GoSignOut />}
               onClick={handleSignOutUser}
+              color="gray.100"
             >
               Sair
             </Button>

@@ -1,6 +1,6 @@
-import { createContext, ReactNode, useContext, useState } from "react";
-import { api } from "../services/api";
-import { useRouter } from "next/router";
+import { createContext, ReactNode, useContext, useState } from 'react';
+import { api } from '../services/api';
+import { useRouter } from 'next/router';
 
 interface UsersProviderProps {
   children: ReactNode;
@@ -26,40 +26,42 @@ export const UsersContext = createContext({} as UsersContextProps);
 
 export function UsersProvider({ children }: UsersProviderProps) {
   const router = useRouter();
-  const [userToken, setUserToken] = useState("");
+  const [userToken, setUserToken] = useState('');
   const [user, setUser] = useState({
-    id: "",
-    name: "",
-    username: "",
-    email: "",
+    id: '',
+    name: '',
+    username: '',
+    email: '',
     isAdmin: false,
-    userToken: "",
+    userToken: ''
   });
   async function handleSignInUser(username: string, password: string) {
     try {
-      const { data } = await api.post("/sessions", {
+      const { data } = await api.post('/sessions', {
         username: username,
-        password: password,
+        password: password
       });
       setUserToken(data.token);
-      sessionStorage.setItem("token", data.token);
       setUser(data.user);
-      router.push("/Homepage");
+      console.log(data.user);
+      sessionStorage.setItem('token', data.token);
+      router.push('/Homepage');
     } catch {
-      router.push("/");
+      router.push('/');
     }
   }
   async function handleSignOutUser() {
-    router.push("/");
+    sessionStorage.clear();
+    router.push('/');
   }
-  console.log("bla", userToken);
+  console.log(user);
   return (
     <UsersContext.Provider
       value={{
         handleSignInUser,
         userToken,
         user,
-        handleSignOutUser,
+        handleSignOutUser
       }}
     >
       {children}

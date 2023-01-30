@@ -1,64 +1,80 @@
-import { Box, HStack, Icon, Text, Tooltip } from "@chakra-ui/react";
+import { Box, HStack, Icon, Text, Tooltip } from '@chakra-ui/react';
 import {
   AiOutlineDelete,
   AiOutlineEdit,
-  AiOutlineFundProjectionScreen,
-} from "react-icons/ai";
-import { IoIosConstruct } from "react-icons/io";
-import { IoHandLeftOutline } from "react-icons/io5";
-import { GiConfirmed } from "react-icons/gi";
+  AiOutlineFundProjectionScreen
+} from 'react-icons/ai';
+import { IoIosConstruct } from 'react-icons/io';
+import { IoHandLeftOutline } from 'react-icons/io5';
+import { GiConfirmed } from 'react-icons/gi';
+import { useTasks } from '../../hooks/useTasks';
 
+interface TasksProps {
+  id: string;
+  title: string;
+  status: string;
+  content: string;
+  userId: string;
+  list: string;
+  created_at: string;
+}
 interface CardTasksProps {
   title: string;
+  id: string;
+  data: TasksProps;
 }
 
-export function CardTasks({ title }: CardTasksProps) {
-  function handleDelete() {
-    console.log("deleted");
+export function CardTasks({ title, id, data }: CardTasksProps) {
+  const { handleDeleteTask, handleEditTask } = useTasks();
+  async function handleDelete() {
+    await handleDeleteTask(id);
+
+    console.log('deleted');
   }
-  function handleEdit() {
-    console.log("edited");
+  async function handleEdit() {
+    await handleEditTask(id, data);
+    console.log('edited');
   }
-  function handleSetTo() {
-    console.log("moved");
+  async function handleSetTo() {
+    console.log('moved');
   }
   const iconsActions = [
     {
       icon: AiOutlineDelete,
       function: handleDelete,
-      color: "red.300",
-      toolTip: "Deletar",
+      color: 'red.300',
+      toolTip: 'Deletar'
     },
     {
       icon: AiOutlineEdit,
       function: handleEdit,
-      color: "teal",
-      toolTip: "Editar",
+      color: 'teal',
+      toolTip: 'Editar'
     },
     {
       icon: GiConfirmed,
       function: handleSetTo,
-      color: "gray.100",
-      toolTip: "Marcar como finalizado",
+      color: 'gray.100',
+      toolTip: 'Marcar como finalizado'
     },
     {
       icon: IoHandLeftOutline,
       function: handleSetTo,
-      color: "gray.100",
-      toolTip: "Marcar como a fazer",
+      color: 'gray.100',
+      toolTip: 'Marcar como a fazer'
     },
     {
       icon: IoIosConstruct,
       function: handleSetTo,
-      color: "gray.100",
-      toolTip: "Marcar como fazendo",
+      color: 'gray.100',
+      toolTip: 'Marcar como fazendo'
     },
     {
       icon: AiOutlineFundProjectionScreen,
       function: handleSetTo,
-      color: "gray.100",
-      toolTip: "Marcar como a definir",
-    },
+      color: 'gray.100',
+      toolTip: 'Marcar como a definir'
+    }
   ];
   return (
     <HStack
@@ -70,8 +86,8 @@ export function CardTasks({ title }: CardTasksProps) {
       justifyContent="space-between"
       _hover={{
         span: {
-          visibility: "visible",
-        },
+          visibility: 'visible'
+        }
       }}
     >
       <Text>{title}</Text>

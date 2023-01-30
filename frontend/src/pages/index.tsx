@@ -1,14 +1,14 @@
-import Head from "next/head";
-import { Box, Text, Divider, VStack } from "@chakra-ui/react";
-import { Login } from "../components/Login";
-import LoginAnimation from "../components/Animations/Login";
-import { useState } from "react";
-import { Register } from "../components/Register";
+import Head from 'next/head';
+import { Box, Text, Divider, VStack } from '@chakra-ui/react';
+import { Login } from '../components/Login';
+import LoginAnimation from '../components/Animations/Login';
+import { useState } from 'react';
+import { Register } from '../components/Register';
 
 export default function Home() {
-  const [authenticated, setAuthenticated] = useState(false);
-  function handleAuthenticated() {
-    setAuthenticated(true);
+  const [isUser, setIsUser] = useState(false);
+  function handleIsUser() {
+    setIsUser(true);
   }
   return (
     <Box as="div" w="100%" maxW="1920px" h="100vh" margin="auto">
@@ -31,7 +31,7 @@ export default function Home() {
         <VStack w="full" h="full" padding="1.2rem 4rem">
           <Box w="100%">
             <Text as="h2" fontSize={24}>
-              Bem vindo ao{" "}
+              Bem vindo ao{' '}
             </Text>
             <Text
               as="h1"
@@ -44,12 +44,12 @@ export default function Home() {
               TaskBook
             </Text>
           </Box>
-          {authenticated ? (
+          {isUser ? (
             <>
               <Register />
               <Text>
-                Já tem conta?{" "}
-                <Text as="button" color="teal" onClick={handleAuthenticated}>
+                Já tem conta?{' '}
+                <Text as="button" color="teal" onClick={handleIsUser}>
                   Faça login
                 </Text>
               </Text>
@@ -58,8 +58,8 @@ export default function Home() {
             <>
               <Login />
               <Text>
-                Não tem conta?{" "}
-                <Text as="button" color="teal" onClick={handleAuthenticated}>
+                Não tem conta?{' '}
+                <Text as="button" color="teal" onClick={handleIsUser}>
                   Cadastre-se
                 </Text>
               </Text>

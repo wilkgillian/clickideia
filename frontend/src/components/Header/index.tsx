@@ -4,6 +4,7 @@ import ModalTask from '../ModalTask';
 import UserModal from '../UserModal';
 
 export default function Header() {
+  // const {}
   return (
     <HStack
       w="full"
@@ -12,8 +13,13 @@ export default function Header() {
       alignItems="center"
       justifyContent="space-between"
     >
-      <ModalTask type="criar" />
-      <Flex alignItems="center" w="20%" maxW={200} justifyContent="space-between">
+      <ModalTask type="Criar" />
+      <Flex
+        alignItems="center"
+        w="20%"
+        maxW={200}
+        justifyContent="space-between"
+      >
         <Avatar ml={5} w={10} h={10} src="https://github.com/wilkgillian.png" />
         <Text>Wilk Gillian</Text>
 
