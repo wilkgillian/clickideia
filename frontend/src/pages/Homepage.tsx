@@ -1,13 +1,15 @@
-import { useEffect } from 'react';
-import Layout from '../components/Layout';
-import { useTasks } from '../hooks/useTasks';
+import { useEffect } from "react";
+import Layout from "../components/Layout";
+import { useTasks } from "../hooks/useTasks";
+import { useUser } from "../hooks/useUser";
 
 export default function HomePage() {
-  const { loadTasks, tasks } = useTasks();
+  const { loadTasks } = useTasks();
+  const { loadUser } = useUser();
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
-    loadTasks(token);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tasks]);
+    loadTasks();
+    loadUser();
+  }, []);
+
   return <Layout />;
 }

@@ -17,8 +17,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    allowedHeaders: '*',
-    methods: '*',
+    methods: 'GET, PUT, POST, DELETE, PATCH',
     origin: '*',
   }),
 );

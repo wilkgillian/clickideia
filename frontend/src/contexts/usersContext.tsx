@@ -1,6 +1,12 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
-import { api } from '../services/api';
-import { useRouter } from 'next/router';
+import {
+  createContext,
+  ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
+import { api } from "../services/api";
+import { useRouter } from "next/router";
 
 interface UsersProviderProps {
   children: ReactNode;
@@ -8,6 +14,7 @@ interface UsersProviderProps {
 
 interface UsersContextProps {
   user: UsersProps;
+  loadUser: () => Promise<void>;
   handleSignInUser: (username: string, password: string) => Promise<void>;
   handleSignOutUser: () => Promise<void>;
   userToken: string;
@@ -26,42 +33,58 @@ export const UsersContext = createContext({} as UsersContextProps);
 
 export function UsersProvider({ children }: UsersProviderProps) {
   const router = useRouter();
-  const [userToken, setUserToken] = useState('');
+  const [data, setData] = useState<string | null>("");
+  const [userToken, setUserToken] = useState("");
   const [user, setUser] = useState({
-    id: '',
-    name: '',
-    username: '',
-    email: '',
+    id: "",
+    name: "",
+    username: "",
+    email: "",
     isAdmin: false,
-    userToken: ''
+    userToken: "",
   });
+  async function loadUser() {
+    async function getSessionStorage(): Promise<void> {
+      return new Promise((resolve) => {
+        setData(sessionStorage.getItem("user"));
+        resolve();
+      });
+    }
+    await getSessionStorage();
+    if (data) {
+      const user = JSON.parse(data);
+      setUser(user);
+    }
+
+    return;
+  }
   async function handleSignInUser(username: string, password: string) {
     try {
-      const { data } = await api.post('/sessions', {
+      const { data } = await api.post("/sessions", {
         username: username,
-        password: password
+        password: password,
       });
       setUserToken(data.token);
-      setUser(data.user);
-      console.log(data.user);
-      sessionStorage.setItem('token', data.token);
-      router.push('/Homepage');
+      sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("user", JSON.stringify(data.user));
+      router.push("/Homepage");
     } catch {
-      router.push('/');
+      router.push("/");
     }
   }
   async function handleSignOutUser() {
     sessionStorage.clear();
-    router.push('/');
+    router.push("/");
   }
-  console.log(user);
+
   return (
     <UsersContext.Provider
       value={{
         handleSignInUser,
         userToken,
         user,
-        handleSignOutUser
+        handleSignOutUser,
+        loadUser,
       }}
     >
       {children}

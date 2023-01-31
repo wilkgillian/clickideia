@@ -14,7 +14,7 @@ function UserNavLinks({ link, title, icon }: UserNavLinksProps) {
       <Icon as={icon} color="gray.100" />
       <Link href={link} passHref>
         <Text
-          as="a"
+          as="span"
           cursor="pointer"
           _hover={{
             textDecoration: 'underline'

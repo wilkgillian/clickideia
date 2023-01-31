@@ -1,4 +1,4 @@
-import { useDisclosure } from '@chakra-ui/hooks';
+import { useDisclosure } from "@chakra-ui/hooks";
 import {
   Button,
   Modal,
@@ -10,40 +10,39 @@ import {
   Input,
   Textarea,
   VStack,
-  Select
-} from '@chakra-ui/react';
-import { FormEvent, useState } from 'react';
-import { GrAddCircle } from 'react-icons/gr';
-import { useTasks } from '../../hooks/useTasks';
-import { useUser } from '../../hooks/useUser';
+  Select,
+} from "@chakra-ui/react";
+import { FormEvent, useState } from "react";
+import { GrAddCircle } from "react-icons/gr";
+import { useTasks } from "../../hooks/useTasks";
+import { useUser } from "../../hooks/useUser";
 
 interface ModaltaskProps {
-  type: 'Editar' | 'Criar';
+  type: "Editar" | "Criar";
 }
 
 export default function ModalTask({ type }: ModaltaskProps) {
   const { user, userToken } = useUser();
-  console.log(user, userToken);
   const { handleCreateTask } = useTasks();
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [list, setList] = useState('');
-  const [status, setStatus] = useState('to_do');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [list, setList] = useState("");
+  const [status, setStatus] = useState("to_do");
 
   const { isOpen, onOpen, onClose } = useDisclosure();
 
+  const data = {
+    title: title,
+    content: content,
+    list: list,
+    userId: user.id,
+  };
   async function createTask(e: FormEvent) {
     e.preventDefault();
-    const data = {
-      title: title,
-      content: content,
-      list: list,
-      userId: user.id
-    };
-    await handleCreateTask(data, userToken);
-    setTitle('');
-    setContent('');
-    setList('');
+    await handleCreateTask(e, data);
+    setTitle("");
+    setContent("");
+    setList("");
     onClose();
   }
 
@@ -61,27 +60,27 @@ export default function ModalTask({ type }: ModaltaskProps) {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {type === 'Criar' ? (
-              <VStack as="form" onSubmit={e => createTask(e)}>
+            {type === "Criar" ? (
+              <VStack as="form" onSubmit={(e) => handleCreateTask(e, data)}>
                 <VStack gap={4} w="100%" padding="0 3rem">
                   <Input
                     type="text"
                     value={title}
                     placeholder="Titulo da tarefa"
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                   <Input
                     type="text"
                     placeholder="Lista"
                     value={list}
-                    onChange={e => setList(e.target.value)}
+                    onChange={(e) => setList(e.target.value)}
                   />
                   <Textarea
                     placeholder="Conteudo"
                     color="#fff"
                     maxH={12}
                     value={content}
-                    onChange={e => setContent(e.target.value)}
+                    onChange={(e) => setContent(e.target.value)}
                   />
                   <Button
                     width="100%"
@@ -94,32 +93,32 @@ export default function ModalTask({ type }: ModaltaskProps) {
                 </VStack>
               </VStack>
             ) : (
-              <VStack as="form" onSubmit={e => createTask(e)}>
+              <VStack as="form" onSubmit={(e) => createTask(e)}>
                 <VStack gap={4} w="100%" padding="0 3rem">
                   <Input
                     type="text"
                     value={title}
                     placeholder="Titulo da tarefa"
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={(e) => setTitle(e.target.value)}
                   />
                   <Input
                     type="text"
                     placeholder="Lista"
                     value={list}
-                    onChange={e => setList(e.target.value)}
+                    onChange={(e) => setList(e.target.value)}
                   />
                   <Textarea
                     placeholder="Conteudo"
                     color="#fff"
                     maxH={12}
                     value={content}
-                    onChange={e => setContent(e.target.value)}
+                    onChange={(e) => setContent(e.target.value)}
                   />
 
                   <Select
                     placeholder="Selecione o status da tarefa"
                     value={status}
-                    onChange={e => setStatus(e.target.value)}
+                    onChange={(e) => setStatus(e.target.value)}
                   >
                     <option value="making">Fazendo</option>
                     <option value="completed">Completa</option>

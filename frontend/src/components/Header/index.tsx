@@ -1,10 +1,11 @@
-import { Flex, Avatar, Text, HStack } from '@chakra-ui/react';
-import ModalTask from '../ModalTask';
+import { Flex, Avatar, Text, HStack } from "@chakra-ui/react";
+import ModalTask from "../ModalTask";
 
-import UserModal from '../UserModal';
+import UserModal from "../UserModal";
+import { useUser } from "../../hooks/useUser";
 
 export default function Header() {
-  // const {}
+  const { user } = useUser();
   return (
     <HStack
       w="full"
@@ -21,9 +22,9 @@ export default function Header() {
         justifyContent="space-between"
       >
         <Avatar ml={5} w={10} h={10} src="https://github.com/wilkgillian.png" />
-        <Text>Wilk Gillian</Text>
+        <Text textTransform="capitalize">{user.name}</Text>
 
-        <UserModal title="Wilk Gillian" username="@wilkgillian" />
+        <UserModal title={user.name} username={user.username} />
       </Flex>
     </HStack>
   );
