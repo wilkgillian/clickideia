@@ -4,7 +4,7 @@ import { DeleteTaskUseCase } from './DeleteTaskUseCase';
 
 export class DeleteTaskController {
   async handle(req: Request, res: Response): Promise<Response<string>> {
-    const { id } = req.body;
+    const id = req.params.id;
     const deleteTasksUseCase = container.resolve(DeleteTaskUseCase);
     await deleteTasksUseCase.execute(id);
     return res.status(201).send({ message: 'Task deletado com sucesso' });

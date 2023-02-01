@@ -7,7 +7,7 @@ import Graph from '../Graph';
 function Aside() {
   return (
     <VStack w="40%" h="calc(100vh - 6rem)" overflowY="auto" gap={4}>
-      <CardCurrentTask title="Beber água" />
+      <CardCurrentTask />
       <CardCurrent cardContent="ejejkajsa hsjakjsjkasjas jsjkasjjaksjajsdas djsjkakjsasjdbabasjbd jasjasjkdajsd jskasjdbasjdas jsjkajsdjajsdnasnx jsdjaj jsda sd akjj" />
       <Graph />
     </VStack>

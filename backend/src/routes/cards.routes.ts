@@ -17,11 +17,11 @@ const updateTaskController = new UpdateTaskController();
 const deleteTaskController = new DeleteTaskController();
 
 cardsRoutes.use(ensureAuthenticated);
-cardsRoutes.get('/card', getOneTaskController.handle);
+cardsRoutes.get('/card/:id', getOneTaskController.handle);
 cardsRoutes.get('/', listTasksController.handle);
 cardsRoutes.get('/cards_user', listTasksByUserController.handle);
-cardsRoutes.delete('/', deleteTaskController.handle);
-cardsRoutes.put('/', updateTaskController.handle);
+cardsRoutes.delete('/:id', deleteTaskController.handle);
+cardsRoutes.put('/:id', updateTaskController.handle);
 cardsRoutes.post('/', createTaskController.handle);
 
 export { cardsRoutes };

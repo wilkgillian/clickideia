@@ -8,6 +8,7 @@ import { IoIosConstruct } from 'react-icons/io';
 import { IoHandLeftOutline } from 'react-icons/io5';
 import { GiConfirmed } from 'react-icons/gi';
 import { useTasks } from '../../hooks/useTasks';
+import ModalTask from '../ModalTask';
 
 interface TasksProps {
   id: string;
@@ -45,12 +46,12 @@ export function CardTasks({ title, id, data }: CardTasksProps) {
       color: 'red.300',
       toolTip: 'Deletar'
     },
-    {
-      icon: AiOutlineEdit,
-      function: handleEdit,
-      color: 'teal',
-      toolTip: 'Editar'
-    },
+    // {
+    //   icon: AiOutlineEdit,
+    //   function: handleEdit,
+    //   color: 'teal',
+    //   toolTip: 'Editar'
+    // },
     {
       icon: GiConfirmed,
       function: handleSetTo,
@@ -95,11 +96,19 @@ export function CardTasks({ title, id, data }: CardTasksProps) {
         as="span"
         w="30%"
         justifyContent="space-between"
+        alignItems="center"
         visibility="hidden"
         pr={2}
       >
+        <ModalTask type="Editar" id={id} />
         {iconsActions.map((icons, index) => (
-          <Tooltip key={index} label={icons.toolTip} aria-label={icons.toolTip}>
+          <Tooltip
+            key={index}
+            label={icons.toolTip}
+            aria-label={icons.toolTip}
+            display="flex"
+            alignItems="center"
+          >
             <Box as="span">
               <Icon
                 as={icons.icon}
