@@ -7,9 +7,11 @@ import { useTasks } from "../../hooks/useTasks";
 
 function Aside() {
   const { tasks } = useTasks();
-  let currentTask = tasks.findLast((task) => task.created_at);
+  let tasksOrdered = tasks.find((task) => task.status === 'to_do');
+  const currentTask = tasksOrdered? tasksOrdered.at(0) : '';
+
   const infos = {
-    id: currentTask ? currentTask.id : "",
+    id: currentTask.at(0) ? currentTask.id : "",
     title: currentTask ? currentTask.title : "",
     created_at: currentTask ? currentTask.created_at : "",
     content: currentTask ? currentTask.content : "",
