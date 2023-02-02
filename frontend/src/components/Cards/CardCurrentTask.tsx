@@ -1,7 +1,9 @@
 import { Box, Flex, HStack, Icon, Text } from "@chakra-ui/react";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import ModalTask from "../ModalTask";
-import { formatDateAndHour } from "../utils/formatDateAndHour";
+import { useUser } from "../../redux/sliceUser";
+import { useSelector } from "react-redux/es/exports";
+// import { formatDateAndHour } from "../utils/formatDateAndHour";
 
 interface TaskProps {
   id: string;
@@ -10,7 +12,11 @@ interface TaskProps {
 }
 
 function CardCurrentTask({ id, title, created_at }: TaskProps) {
-  const dateAndHour = formatDateAndHour(created_at);
+  // const dateAndHour = formatDateAndHour(created_at);
+
+  const user = useSelector(useUser)
+
+  console.log(user)
 
   return (
     <Box w="full" bg="gray.800" p={5} borderRadius={10}>
@@ -31,14 +37,14 @@ function CardCurrentTask({ id, title, created_at }: TaskProps) {
           <Text fontSize={12}>Hora de criação</Text>
           <Flex alignItems="center" gap={4}>
             <Icon as={AiOutlineClockCircle} />
-            <Text>{dateAndHour.time}</Text>
+            <Text>sas</Text>
           </Flex>
         </Box>
         <Box>
           <Text fontSize={12}>Data de criação</Text>
           <Flex alignItems="center" gap={4}>
             <Icon as={AiOutlineCalendar} />
-            <Text>{dateAndHour.date}</Text>
+            <Text>as</Text>
           </Flex>
         </Box>
       </HStack>

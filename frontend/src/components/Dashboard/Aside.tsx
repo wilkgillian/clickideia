@@ -6,24 +6,24 @@ import Graph from "../Graph";
 import { useTasks } from "../../hooks/useTasks";
 
 function Aside() {
-  const { tasks } = useTasks();
-  let tasksOrdered = tasks.find((task) => task.status === 'to_do');
-  const currentTask = tasksOrdered? tasksOrdered.at(0) : '';
+  // const { tasks } = useTasks();
+  // let tasksOrdered = tasks.find((task) => task.status === 'to_do');
+  // const currentTask = tasksOrdered? tasksOrdered.at(0) : '';
 
-  const infos = {
-    id: currentTask.at(0) ? currentTask.id : "",
-    title: currentTask ? currentTask.title : "",
-    created_at: currentTask ? currentTask.created_at : "",
-    content: currentTask ? currentTask.content : "",
-  };
+  // const infos = {
+  //   id: currentTask.at(0) ? currentTask.id : "",
+  //   title: currentTask ? currentTask.title : "",
+  //   created_at: currentTask ? currentTask.created_at : "",
+  //   content: currentTask ? currentTask.content : "",
+  // };
   return (
     <VStack w="40%" h="calc(100vh - 6rem)" overflowY="auto" gap={4}>
       <CardCurrentTask
-        id={infos.id}
-        title={infos.title}
-        created_at={infos.created_at}
+        id="{infos.id}"
+        title="{infos.title}"
+        created_at="{infos.created_at}"
       />
-      <CardCurrent cardContent={infos.content} />
+      <CardCurrent cardContent="{infos.content}" />
       <Graph />
     </VStack>
   );
