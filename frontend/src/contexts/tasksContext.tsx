@@ -1,10 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
-import { api } from '../services/api';
-import { useUser } from '../hooks/useUser';
-import { toast } from 'react-toastify';
+import { createContext, ReactNode, useContext, useState } from "react";
+import { api } from "../services/api";
+import { useUser } from "../hooks/useUser";
+import { toast } from "react-toastify";
 
 interface TasksProviderProps {
   children: ReactNode;
+  token: string | null;
 }
 
 interface TasksContextProps {
@@ -39,85 +40,81 @@ interface EditTasksProps {
 
 export const TasksContext = createContext({} as TasksContextProps);
 
-export function TasksProvider({ children }: TasksProviderProps) {
+export function TasksProvider({ children, token }: TasksProviderProps) {
+  // const token = localStorage.getItem("token");
   const { user } = useUser();
   const [tasks, setTasks] = useState([]);
   async function loadTasks() {
-    const token = sessionStorage.getItem('token');
     if (!token) {
       return;
     }
 
     const userId = user.id;
-    const { data } = await api.get('/cards/cards_user', {
+    const { data } = await api.get("/cards/cards_user", {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       data: {
-        userId: userId
-      }
+        userId: userId,
+      },
     });
     setTasks(data);
   }
   async function handleCreateTask(data: CreateTasksProps) {
-    const token = sessionStorage.getItem('token');
     if (!data.title || !data.content || !data.list || !data.userId) {
-      toast.error('Falha ao adicionar tarefa', {
-        theme: 'dark'
+      toast.error("Falha ao adicionar tarefa", {
+        theme: "dark",
       });
       return;
     }
     try {
-      await api.post('/cards/', data, {
+      await api.post("/cards/", data, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      toast.success('Tarefa adicionada com sucesso!', {
-        theme: 'dark'
+      toast.success("Tarefa adicionada com sucesso!", {
+        theme: "dark",
       });
       loadTasks();
     } catch {
-      toast.error('Falha ao adicionar tarefa!', {
-        theme: 'dark'
+      toast.error("Falha ao adicionar tarefa!", {
+        theme: "dark",
       });
     }
   }
   async function handleGetOneTask(id: string) {
-    const token = sessionStorage.getItem('token');
     const { data } = await api.get(`/cards/card/${id}`, {
       data: {
-        id: id
+        id: id,
       },
       headers: {
-        Authorization: `Bearer ${token}`
-      }
+        Authorization: `Bearer ${token}`,
+      },
     });
     return data;
   }
 
   async function handleEditTask(id: string, data: EditTasksProps) {
-    const token = sessionStorage.getItem('token');
     const taskAlreadyExists = await handleGetOneTask(id);
 
     if (taskAlreadyExists) {
       await api.put(`/cards/${id}`, data, {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
     }
     loadTasks();
   }
   async function handleDeleteTask(id: string) {
-    const token = sessionStorage.getItem('token');
     await api.delete(`/cards/${id}`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token}`,
       },
       data: {
-        id: id
-      }
+        id: id,
+      },
     });
     loadTasks();
   }
@@ -129,7 +126,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
         handleCreateTask,
         handleEditTask,
         handleDeleteTask,
-        loadTasks
+        loadTasks,
       }}
     >
       {children}

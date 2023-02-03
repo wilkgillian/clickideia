@@ -1,15 +1,21 @@
-import Head from 'next/head';
-import { Box, Text, Divider, VStack } from '@chakra-ui/react';
-import { Login } from '../components/Login';
-import LoginAnimation from '../components/Animations/Login';
-import { useState } from 'react';
-import { Register } from '../components/Register';
+import Head from "next/head";
+import { Box, Text, Divider, VStack } from "@chakra-ui/react";
+import { Login } from "../components/Login";
+import LoginAnimation from "../components/Animations/Login";
+import { useEffect, useState } from "react";
+import { Register } from "../components/Register";
+import { useUser } from "../hooks/useUser";
 
 export default function Home() {
   const [isUser, setIsUser] = useState(false);
+  const { loadUser, user } = useUser();
   function handleIsUser() {
     setIsUser(true);
   }
+  useEffect(() => {
+    loadUser();
+  }, []);
+  console.log(user)
   return (
     <Box as="div" w="100%" maxW="1920px" h="100vh" margin="auto">
       <Head>
@@ -31,7 +37,7 @@ export default function Home() {
         <VStack w="full" h="full" padding="1.2rem 4rem">
           <Box w="100%">
             <Text as="h2" fontSize={24}>
-              Bem vindo ao{' '}
+              Bem vindo ao{" "}
             </Text>
             <Text
               as="h1"
@@ -48,7 +54,7 @@ export default function Home() {
             <>
               <Register />
               <Text>
-                Já tem conta?{' '}
+                Já tem conta?{" "}
                 <Text as="button" color="teal" onClick={handleIsUser}>
                   Faça login
                 </Text>
@@ -58,7 +64,7 @@ export default function Home() {
             <>
               <Login />
               <Text>
-                Não tem conta?{' '}
+                Não tem conta?{" "}
                 <Text as="button" color="teal" onClick={handleIsUser}>
                   Cadastre-se
                 </Text>

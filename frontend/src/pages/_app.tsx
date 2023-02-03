@@ -1,14 +1,11 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import type { AppProps } from "next/app";
-import { TasksProvider } from "../contexts/tasksContext";
 import { theme } from "../styles/theme";
 import NextNProgress from "nextjs-progressbar";
 import { UsersProvider } from "../contexts/usersContext";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
-import { Provider } from "react-redux";
-import { store } from "../redux/store";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -22,11 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       <ToastContainer />
       <UsersProvider>
-        <TasksProvider>
-          <Provider store={store}>
-            <Component {...pageProps} />
-          </Provider>
-        </TasksProvider>
+        {/* <TasksProvider> */}
+        <Component {...pageProps} />
+        {/* </TasksProvider> */}
       </UsersProvider>
     </ChakraProvider>
   );

@@ -18,13 +18,9 @@ import {
 import { MdVisibility } from "react-icons/md";
 import { FormEvent, useState } from "react";
 import { useUser } from "../../hooks/useUser";
-import { loginUser } from "../../redux/sliceUser";
-import { useDispatch } from "react-redux/es/hooks/useDispatch";
-// import { loginUser } from "../redux/sliceUser";
 
 export function Login() {
   const { handleSignInUser } = useUser();
-  const dispatch = useDispatch();
   const [show, setShow] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -33,9 +29,7 @@ export function Login() {
   }
   async function handleAuthenticated(event: FormEvent) {
     event.preventDefault();
-    const teste = dispatch(loginUser({ username, password }));
-    console.log(teste);
-    // await handleSignInUser(username, password);
+    await handleSignInUser(username, password);
   }
 
   return (

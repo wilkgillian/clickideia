@@ -1,10 +1,4 @@
-import {
-  createContext,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, ReactNode, useContext, useState } from "react";
 import { api } from "../services/api";
 import { useRouter } from "next/router";
 
@@ -44,13 +38,13 @@ export function UsersProvider({ children }: UsersProviderProps) {
     userToken: "",
   });
   async function loadUser() {
-    async function getSessionStorage(): Promise<void> {
+    async function getlocalStorage(): Promise<void> {
       return new Promise((resolve) => {
-        setData(sessionStorage.getItem("user"));
+        setData(localStorage.getItem("user"));
         resolve();
       });
     }
-    await getSessionStorage();
+    await getlocalStorage();
     if (data) {
       const user = JSON.parse(data);
       setUser(user);
@@ -65,15 +59,15 @@ export function UsersProvider({ children }: UsersProviderProps) {
         password: password,
       });
       setUserToken(data.token);
-      sessionStorage.setItem("token", data.token);
-      sessionStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       router.push("/Homepage");
     } catch {
       router.push("/");
     }
   }
   async function handleSignOutUser() {
-    sessionStorage.clear();
+    localStorage.clear();
     router.push("/");
   }
 

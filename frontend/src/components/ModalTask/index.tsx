@@ -1,4 +1,4 @@
-import { useDisclosure } from '@chakra-ui/hooks';
+import { useDisclosure } from "@chakra-ui/hooks";
 import {
   Button,
   Icon,
@@ -8,15 +8,15 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Tooltip
-} from '@chakra-ui/react';
-import { FaEdit } from 'react-icons/fa';
-import { GrAddCircle } from 'react-icons/gr';
-import FormCreateTask from '../Forms/FormCreateTask';
-import FormEditTask from '../Forms/FormEditTask';
+  Tooltip,
+} from "@chakra-ui/react";
+import { FaEdit } from "react-icons/fa";
+import { GrAddCircle } from "react-icons/gr";
+import FormCreateTask from "../Forms/FormCreateTask";
+import FormEditTask from "../Forms/FormEditTask";
 
 interface ModaltaskProps {
-  type: 'Editar' | 'Criar';
+  type: "Editar" | "Criar";
   id: string;
 }
 
@@ -25,7 +25,7 @@ export default function ModalTask({ type, id }: ModaltaskProps) {
 
   return (
     <>
-      {type === 'Criar' ? (
+      {type === "Criar" ? (
         <>
           <Button
             onClick={onOpen}
@@ -49,14 +49,12 @@ export default function ModalTask({ type, id }: ModaltaskProps) {
         </>
       ) : (
         <>
-          <Tooltip
-            label="Editar"
-            aria-label="Editar"
-            display="flex"
-            alignItems="center"
-          >
-            <Icon onClick={onOpen} color="teal.100" as={FaEdit} />
-          </Tooltip>
+          <Icon
+            onClick={onOpen}
+            color="teal.100"
+            as={FaEdit}
+            cursor="pointer"
+          />
           <Modal isOpen={isOpen} onClose={onClose}>
             <ModalOverlay />
             <ModalContent bg="gray.900" minW="50%" padding={10} margin="auto">

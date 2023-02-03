@@ -1,16 +1,21 @@
-import { useEffect } from 'react';
-import Layout from '../components/Layout';
-import { useTasks } from '../hooks/useTasks';
-import { useUser } from '../hooks/useUser';
+import { useEffect, useState } from "react";
+import Layout from "../components/Layout";
+import { useUser } from "../hooks/useUser";
+import { TasksProvider } from "../contexts/tasksContext";
 
 export default function HomePage() {
-  const { loadTasks } = useTasks();
   const { loadUser } = useUser();
+  const [token, setToken] = useState<string | null>("");
   useEffect(() => {
-    loadTasks();
     loadUser();
+    const token = localStorage.getItem("token");
+    setToken(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <Layout />;
+  return (
+    <TasksProvider token={token}>
+      <Layout />
+    </TasksProvider>
+  );
 }
