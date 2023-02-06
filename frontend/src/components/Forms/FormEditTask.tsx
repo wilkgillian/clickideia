@@ -1,7 +1,6 @@
 import { VStack, Input, Textarea, Select, Button } from "@chakra-ui/react";
 import { useState, FormEvent } from "react";
 import { useTasks } from "../../hooks/useTasks";
-import { useUser } from "../../hooks/useUser";
 
 interface FormCreateTaskProps {
   onClose: () => void;

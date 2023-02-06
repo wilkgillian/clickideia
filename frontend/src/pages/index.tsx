@@ -1,25 +1,27 @@
 import Head from "next/head";
-import { Box, Text, Divider, VStack } from "@chakra-ui/react";
-import { Login } from "../components/Login";
+import { Box, Text, Divider, VStack, SlideFade } from "@chakra-ui/react";
+import { Login } from "../components/Auth/Login";
 import LoginAnimation from "../components/Animations/Login";
 import { useEffect, useState } from "react";
-import { Register } from "../components/Register";
+import { Register } from "../components/Auth/Register";
 import { useUser } from "../hooks/useUser";
+import Aos from "aos";
 
 export default function Home() {
   const [isUser, setIsUser] = useState(false);
-  const { loadUser, user } = useUser();
+  const { loadUser } = useUser();
   function handleIsUser() {
-    setIsUser(true);
+    setIsUser(!isUser);
   }
   useEffect(() => {
     loadUser();
+    // Aos.init({
+    //   duration: 1000,
+    // });
   }, []);
-  console.log(user)
   return (
     <Box as="div" w="100%" maxW="1920px" h="100vh" margin="auto">
       <Head>
-        ../components/Login/Login
         <title>TaskBook</title>
       </Head>
       <Box

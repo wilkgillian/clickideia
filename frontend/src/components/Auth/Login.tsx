@@ -33,7 +33,7 @@ export function Login() {
   }
 
   return (
-    <>
+    <VStack w="full">
       <VStack w="full" gap={2}>
         <Button w="full" disabled={true} h={12} gap={4}>
           <Icon as={AiOutlineGoogle} />{" "}
@@ -93,6 +93,6 @@ export function Login() {
           Login
         </Button>
       </VStack>
-    </>
+    </VStack>
   );
 }

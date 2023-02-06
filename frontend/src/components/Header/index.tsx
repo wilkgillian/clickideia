@@ -3,18 +3,23 @@ import ModalTask from "../ModalTask";
 
 import UserModal from "../UserModal";
 import { useUser } from "../../hooks/useUser";
+import { useRouter } from "next/router";
 
 export default function Header() {
   const { user } = useUser();
+  const router = useRouter();
+
   return (
     <HStack
       w="full"
       h={16}
       p={10}
       alignItems="center"
-      justifyContent="space-between"
+      justifyContent={
+        router.pathname == "/Users" ? "flex-end" : "space-between"
+      }
     >
-      <ModalTask type="Criar" />
+      {router.pathname == "/Homepage" ? <ModalTask type="Criar" /> : ""}
       <Flex
         alignItems="center"
         w="20%"

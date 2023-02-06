@@ -5,12 +5,13 @@ import {
   Icon,
   InputGroup,
   InputLeftElement,
-  InputRightElement
-} from '@chakra-ui/react';
-import { AiOutlineUser, AiOutlineKey, AiOutlineMail } from 'react-icons/ai';
-import { MdVisibility } from 'react-icons/md';
-import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
+  InputRightElement,
+} from "@chakra-ui/react";
+import { AiOutlineUser, AiOutlineKey, AiOutlineMail } from "react-icons/ai";
+import { MdVisibility } from "react-icons/md";
+import { useRouter } from "next/router";
+import { FormEvent, useState } from "react";
+import { motion } from "framer-motion";
 
 export function Register() {
   const [show, setShow] = useState(false);
@@ -23,13 +24,18 @@ export function Register() {
     event.preventDefault();
     setIsAuthenticated(true);
     if (isAuthenticated) {
-      router.push('/Homepage');
+      router.push("/Homepage");
     }
   }
   return (
     <>
-      <VStack w="full" gap={2}>
-        <InputGroup>
+      <VStack as={motion.div} w="full" gap={2} transition={"0.5s linear"}>
+        <InputGroup
+          as={motion.div}
+          initial={{ opacity: 0, x: 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+        >
           <InputLeftElement
             pointerEvents="none"
             // eslint-disable-next-line react/no-children-prop
@@ -59,7 +65,7 @@ export function Register() {
             // eslint-disable-next-line react/no-children-prop
             children={<AiOutlineKey />}
           />
-          <Input h={12} type={show ? 'text' : 'password'} placeholder="Senha" />
+          <Input h={12} type={show ? "text" : "password"} placeholder="Senha" />
           <InputRightElement>
             <Icon as={MdVisibility} onClick={handleClick} />
           </InputRightElement>
@@ -70,7 +76,7 @@ export function Register() {
           colorScheme="teal"
           w="full"
           h={12}
-          onClick={event => handleAuthenticated(event)}
+          onClick={(event) => handleAuthenticated(event)}
         >
           Cadastrar
         </Button>

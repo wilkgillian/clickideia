@@ -1,9 +1,10 @@
-import { VStack, HStack, Box, Text } from "@chakra-ui/react";
+import { VStack, HStack, Box, Text, Spinner } from "@chakra-ui/react";
 import CardsStatus from "../Cards/CardsStatus";
 import { CardTasks } from "../Cards/CardsTasks";
 import { useTasks } from "../../hooks/useTasks";
+import { NotFoundAnimation } from "../Animations/NotFound";
 
-function CardsContainer() {
+function TasksContainer() {
   const { tasks } = useTasks();
   const to_define = tasks.filter((task) => task.status === "to_define").length;
   const to_do = tasks.filter((task) => task.status === "to_do");
@@ -68,17 +69,29 @@ function CardsContainer() {
             Tarefas com prioridade
           </Text>
           <VStack justifyContent="space-between">
-            {to_do.slice(0, 5).map((infos) => (
-              <CardTasks key={infos.id} title={infos.title} id={infos.id} />
-            ))}
+            {to_do.length === 0 ? (
+              <NotFoundAnimation />
+            ) : (
+              to_do
+                .slice(0, 5)
+                .map((infos) => (
+                  <CardTasks key={infos.id} title={infos.title} id={infos.id} />
+                ))
+            )}
           </VStack>
           <Text color="teal" m="1rem 0 1rem 0">
             Outras tarefas
           </Text>
           <VStack justifyContent="space-between">
-            {tasks.slice(6).map((infos) => (
-              <CardTasks key={infos.id} title={infos.title} id={infos.id} />
-            ))}
+            {tasks.filter((tasks) => tasks.status != "to_do").length === 0 ? (
+              <NotFoundAnimation />
+            ) : (
+              tasks
+                .filter((tasks) => tasks.status != "to_do")
+                .map((infos) => (
+                  <CardTasks key={infos.id} title={infos.title} id={infos.id} />
+                ))
+            )}
           </VStack>
         </Box>
       </Box>
@@ -86,4 +99,4 @@ function CardsContainer() {
   );
 }
 
-export default CardsContainer;
+export default TasksContainer;

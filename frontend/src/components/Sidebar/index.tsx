@@ -1,56 +1,55 @@
-import Link from 'next/link';
-import Image from 'next/image';
-import { VStack } from '@chakra-ui/react';
-import Logo from '../../../public/assets/logo.svg';
-import { AiOutlineHome, AiOutlineUser } from 'react-icons/ai';
-import { FaTasks } from 'react-icons/fa';
-import { BsGraphUp } from 'react-icons/bs';
-import { BiTask } from 'react-icons/bi';
-import { VscGraph } from 'react-icons/vsc';
-import BoxLinks from './BoxLinks';
+import Link from "next/link";
+import Image from "next/image";
+import { VStack } from "@chakra-ui/react";
+import Logo from "../../../public/assets/logo.svg";
+import { AiOutlineHome, AiOutlineUser } from "react-icons/ai";
+import { FaTasks } from "react-icons/fa";
+import { BsGraphUp } from "react-icons/bs";
+import { VscGraph } from "react-icons/vsc";
+import BoxLinks from "./BoxLinks";
 
 export default function Sidebar() {
   const navLinks = {
     categories: {
-      title: 'Categorias',
+      title: "Categorias",
       navLinks: [
         {
-          link: '/Homepage',
-          title: 'Home',
-          icon: AiOutlineHome
+          link: "/Homepage",
+          title: "Home",
+          icon: AiOutlineHome,
         },
         {
-          link: '/Users',
-          title: 'Usuários',
-          icon: AiOutlineUser
+          link: "/Users",
+          title: "Usuários",
+          icon: AiOutlineUser,
         },
+        // {
+        //   link: '/Mytasks',
+        //   title: 'Minhas Tarefas',
+        //   icon: BiTask
+        // },
         {
-          link: '/Mytasks',
-          title: 'Minhas Tarefas',
-          icon: BiTask
+          link: "/Tasks",
+          title: "Todas as Tarefas",
+          icon: FaTasks,
         },
-        {
-          link: '/Tasks',
-          title: 'Todas as Tarefas',
-          icon: FaTasks
-        }
-      ]
+      ],
     },
     analytics: {
-      title: 'Analytics',
+      title: "Analytics",
       navLinks: [
         {
-          link: '/Homepage',
-          title: 'Gráfico',
-          icon: BsGraphUp
+          link: "/Graph",
+          title: "Gráfico",
+          icon: BsGraphUp,
         },
         {
-          link: '/Homepage',
-          title: 'Estatísticas',
-          icon: VscGraph
-        }
-      ]
-    }
+          link: "/Statistics",
+          title: "Estatísticas",
+          icon: VscGraph,
+        },
+      ],
+    },
   };
 
   return (
@@ -63,7 +62,7 @@ export default function Sidebar() {
       padding="2rem 1.5rem"
       alignItems="left"
     >
-      <Link passHref href={'/Homepage'}>
+      <Link passHref href={"/Homepage"}>
         <Image src={Logo} width="100" height="100" alt="logo"></Image>
       </Link>
       <BoxLinks

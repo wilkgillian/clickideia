@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import { useUser } from "../hooks/useUser";
+import { useTasks } from "../hooks/useTasks";
+import { Box } from "@chakra-ui/react";
 import { TasksProvider } from "../contexts/tasksContext";
-import Dashboard from "../components/Dashboard";
+import { useUser } from "../hooks/useUser";
 
-export default function HomePage() {
+function Users() {
   const { loadUser } = useUser();
   const [token, setToken] = useState<string | null>("");
   useEffect(() => {
@@ -13,12 +14,13 @@ export default function HomePage() {
     setToken(token);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
   return (
     <TasksProvider token={token}>
       <Layout>
-        <Dashboard />
+        <Box>Users</Box>
       </Layout>
     </TasksProvider>
   );
 }
+
+export default Users;

@@ -1,5 +1,5 @@
 import { Box, HStack, Icon, Text, Tooltip } from "@chakra-ui/react";
-import { AiOutlineDelete, AiOutlineFundProjectionScreen } from "react-icons/ai";
+import { AiOutlineFundProjectionScreen } from "react-icons/ai";
 import { IoIosConstruct } from "react-icons/io";
 import { IoHandLeftOutline } from "react-icons/io5";
 import { GiConfirmed } from "react-icons/gi";
@@ -12,45 +12,39 @@ interface CardTasksProps {
 }
 
 export function CardTasks({ title, id }: CardTasksProps) {
-  const { handleDeleteTask } = useTasks();
-  async function handleDelete() {
-    await handleDeleteTask(id);
-
-    console.log("deleted");
-  }
-  async function handleSetTo() {
-    console.log("moved");
+  const { handleSetTask } = useTasks();
+  async function handleSetTo(status: string) {
+    console.log("função invocada");
+    await handleSetTask(id, status);
   }
   const iconsActions = [
     {
-      icon: AiOutlineDelete,
-      function: handleDelete,
-      color: "red.300",
-      toolTip: "Deletar",
-    },
-    {
       icon: GiConfirmed,
-      function: handleSetTo,
       color: "gray.100",
       toolTip: "Marcar como finalizado",
+      status: "completed",
+      function: handleSetTo,
     },
     {
       icon: IoHandLeftOutline,
-      function: handleSetTo,
       color: "gray.100",
       toolTip: "Marcar como a fazer",
+      status: "to_do",
+      function: handleSetTo,
     },
     {
       icon: IoIosConstruct,
-      function: handleSetTo,
       color: "gray.100",
       toolTip: "Marcar como fazendo",
+      status: "making",
+      function: handleSetTo,
     },
     {
       icon: AiOutlineFundProjectionScreen,
-      function: handleSetTo,
       color: "gray.100",
       toolTip: "Marcar como a definir",
+      status: "to_define",
+      function: handleSetTo,
     },
   ];
   return (
@@ -88,7 +82,7 @@ export function CardTasks({ title, id }: CardTasksProps) {
               <Box as="span">
                 <Icon
                   as={icons.icon}
-                  onClick={icons.function}
+                  onClick={() => icons.function(icons.status)}
                   color={icons.color}
                   cursor="pointer"
                 />
@@ -104,6 +98,14 @@ export function CardTasks({ title, id }: CardTasksProps) {
         alignItems="center"
       >
         <ModalTask type="Editar" id={id} />
+      </Tooltip>
+      <Tooltip
+        label="Deletar"
+        aria-label="Deletar"
+        display="flex"
+        alignItems="center"
+      >
+        <ModalTask type="Deletar" id={id} />
       </Tooltip>
     </HStack>
   );

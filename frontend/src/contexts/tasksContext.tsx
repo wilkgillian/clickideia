@@ -13,6 +13,7 @@ interface TasksContextProps {
   loadTasks: () => void;
   handleCreateTask: (data: CreateTasksProps) => Promise<void>;
   handleEditTask: (id: string, data: EditTasksProps) => Promise<void>;
+  handleSetTask: (id: string, status: string) => Promise<void>;
   handleDeleteTask: (id: string) => Promise<void>;
 }
 
@@ -41,7 +42,6 @@ interface EditTasksProps {
 export const TasksContext = createContext({} as TasksContextProps);
 
 export function TasksProvider({ children, token }: TasksProviderProps) {
-  // const token = localStorage.getItem("token");
   const { user } = useUser();
   const [tasks, setTasks] = useState([]);
   async function loadTasks() {
@@ -97,26 +97,63 @@ export function TasksProvider({ children, token }: TasksProviderProps) {
 
   async function handleEditTask(id: string, data: EditTasksProps) {
     const taskAlreadyExists = await handleGetOneTask(id);
-
-    if (taskAlreadyExists) {
-      await api.put(`/cards/${id}`, data, {
+    try {
+      if (taskAlreadyExists) {
+        await api.put(`/cards/${id}`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+      toast.success("Tarefa editada com sucesso!", {
+        theme: "dark",
+      });
+      loadTasks();
+    } catch {
+      toast.error("Falha ao editar tarefa!", {
+        theme: "dark",
+      });
+    }
+  }
+  async function handleDeleteTask(id: string) {
+    try {
+      await api.delete(`/cards/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+      toast.success("Tarefa deletada com sucesso!", {
+        theme: "dark",
+      });
+      loadTasks();
+    } catch {
+      toast.error("Falha ao deletar tarefa!", {
+        theme: "dark",
+      });
     }
-    loadTasks();
   }
-  async function handleDeleteTask(id: string) {
-    await api.delete(`/cards/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        id: id,
-      },
-    });
-    loadTasks();
+  async function handleSetTask(id: string, status: string) {
+    const taskAlreadyExists = await handleGetOneTask(id);
+    const data = {
+      status: status,
+    };
+    try {
+      if (taskAlreadyExists) {
+        await api.put(`/cards/${id}`, data, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+      }
+      toast.success("Tarefa alterada com sucesso!", {
+        theme: "dark",
+      });
+      loadTasks();
+    } catch {
+      toast.error("Falha ao alterar tarefa!", {
+        theme: "dark",
+      });
+    }
   }
 
   return (
@@ -127,6 +164,7 @@ export function TasksProvider({ children, token }: TasksProviderProps) {
         handleEditTask,
         handleDeleteTask,
         loadTasks,
+        handleSetTask,
       }}
     >
       {children}

@@ -1,8 +1,8 @@
 import { Box, Spinner } from "@chakra-ui/react";
-import CardsContainer from "../Tasks";
 import Aside from "./Aside";
 import { useTasks } from "../../hooks/useTasks";
 import { useEffect } from "react";
+import TasksContainer from "../TasksContainer";
 
 export default function Dashboard() {
   const { tasks, loadTasks } = useTasks();
@@ -13,7 +13,7 @@ export default function Dashboard() {
     <Box display="flex" w="full" p="0 2.4rem" gap={4}>
       {tasks ? (
         <>
-          <CardsContainer />
+          <TasksContainer />
           <Aside />
         </>
       ) : (

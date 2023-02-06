@@ -1,6 +1,7 @@
-import { Flex, Text, Icon } from '@chakra-ui/react';
-import Link from 'next/link';
-import { ElementType } from 'react';
+import { Flex, Text, Icon } from "@chakra-ui/react";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ElementType } from "react";
 
 interface NavlinksProps {
   icon: ElementType;
@@ -9,17 +10,22 @@ interface NavlinksProps {
 }
 
 function NavLinks({ icon, title, link }: NavlinksProps) {
+  const router = useRouter();
   return (
     <Flex
       _hover={{
-        color: 'teal'
+        color: "teal",
       }}
       justifyContent="space-between"
       alignItems="center"
+      color={router.pathname == link ? "teal" : ""}
+      borderBottom={router.pathname == link ? "1px solid teal" : ""}
     >
       <Link passHref href={link}>
         <Icon as={icon} />
-        <Text ml={2}>{title}</Text>
+        <Text ml={2} fontWeight={router.pathname == link ? "bold" : "normal"}>
+          {title}
+        </Text>
       </Link>
     </Flex>
   );

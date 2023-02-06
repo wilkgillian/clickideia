@@ -1,5 +1,5 @@
 import Lottie from 'react-lottie';
-import { Box, Center, Flex } from '@chakra-ui/react';
+import { Center, Flex } from '@chakra-ui/react';
 import * as animationData from './jsons/Login.json';
 
 function LoginAnimation() {

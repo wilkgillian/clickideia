@@ -1,11 +1,14 @@
 import { Box, VStack } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import Header from "../Header";
-import Dashboard from "../Dashboard";
 import Sidebar from "../Sidebar";
 import { useTasks } from "../../hooks/useTasks";
 
-function Layout() {
+interface LayoutProps {
+  children: ReactNode;
+}
+
+function Layout({ children }: LayoutProps) {
   const { loadTasks } = useTasks();
   useEffect(() => {
     loadTasks();
@@ -15,7 +18,7 @@ function Layout() {
       <Sidebar />
       <VStack w="full">
         <Header />
-        <Dashboard />
+        {children}
       </VStack>
     </Box>
   );

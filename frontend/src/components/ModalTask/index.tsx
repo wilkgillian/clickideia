@@ -8,16 +8,17 @@ import {
   ModalContent,
   ModalHeader,
   ModalOverlay,
-  Tooltip,
 } from "@chakra-ui/react";
 import { FaEdit } from "react-icons/fa";
 import { GrAddCircle } from "react-icons/gr";
 import FormCreateTask from "../Forms/FormCreateTask";
 import FormEditTask from "../Forms/FormEditTask";
+import { AiOutlineDelete } from "react-icons/ai";
+import FormDeleteTask from "../Forms/FormDeleteTask";
 
 interface ModaltaskProps {
-  type: "Editar" | "Criar";
-  id: string;
+  type: "Editar" | "Criar" | "Deletar";
+  id?: string;
 }
 
 export default function ModalTask({ type, id }: ModaltaskProps) {
@@ -48,6 +49,9 @@ export default function ModalTask({ type, id }: ModaltaskProps) {
           </Modal>
         </>
       ) : (
+        ""
+      )}
+      {type === "Editar" ? (
         <>
           <Icon
             onClick={onOpen}
@@ -63,11 +67,38 @@ export default function ModalTask({ type, id }: ModaltaskProps) {
               </ModalHeader>
               <ModalCloseButton />
               <ModalBody>
-                <FormEditTask onClose={onClose} id={id} />
+                <FormEditTask onClose={onClose} id={id ? id : ""} />
               </ModalBody>
             </ModalContent>
           </Modal>
         </>
+      ) : (
+        ""
+      )}
+
+      {type === "Deletar" ? (
+        <>
+          <Icon
+            onClick={onOpen}
+            color="red.500"
+            as={AiOutlineDelete}
+            cursor="pointer"
+          />
+          <Modal isOpen={isOpen} onClose={onClose}>
+            <ModalOverlay />
+            <ModalContent bg="gray.900" minW="50%" padding={10} margin="auto">
+              <ModalHeader alignSelf="center" fontWeight="bold" color="teal">
+                Tem certeza que quer {type} esta tarefa?
+              </ModalHeader>
+              <ModalCloseButton />
+              <ModalBody>
+                <FormDeleteTask onClose={onClose} id={id ? id : ""} />
+              </ModalBody>
+            </ModalContent>
+          </Modal>
+        </>
+      ) : (
+        ""
       )}
     </>
   );
