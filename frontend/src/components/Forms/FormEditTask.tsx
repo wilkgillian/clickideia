@@ -1,4 +1,11 @@
-import { VStack, Input, Textarea, Select, Button } from "@chakra-ui/react";
+import {
+  VStack,
+  Input,
+  Textarea,
+  Select,
+  Button,
+  HStack,
+} from "@chakra-ui/react";
 import { useState, FormEvent } from "react";
 import { useTasks } from "../../hooks/useTasks";
 
@@ -32,27 +39,33 @@ function FormEditTask({ id, onClose }: FormCreateTaskProps) {
     setList(currentTask ? currentTask.list : "");
     onClose();
   }
+  async function handleAbort() {
+    setTitle(currentTask ? currentTask.title : "");
+    setContent(currentTask ? currentTask.content : "");
+    setList(currentTask ? currentTask.list : "");
+    onClose();
+  }
 
   return (
     <VStack as="form" onSubmit={(e) => createTask(e)}>
       <VStack gap={4} w="100%" padding="0 3rem">
         <Input
           type="text"
-          value={currentTask?.title}
+          value={title}
           placeholder="Titulo da tarefa"
           onChange={(e) => setTitle(e.target.value)}
         />
         <Input
           type="text"
           placeholder="Lista"
-          value={currentTask?.list}
+          value={list}
           onChange={(e) => setList(e.target.value)}
         />
         <Textarea
           placeholder="Conteudo"
           color="#fff"
           maxH={12}
-          value={currentTask?.content}
+          value={content}
           onChange={(e) => setContent(e.target.value)}
         />
 
@@ -95,10 +108,24 @@ function FormEditTask({ id, onClose }: FormCreateTaskProps) {
             A Definir
           </option>
         </Select>
-
-        <Button width="100%" colorScheme="teal" fontWeight="bold" type="submit">
-          Salvar
-        </Button>
+        <HStack w="full">
+          <Button
+            width="100%"
+            colorScheme="teal"
+            fontWeight="bold"
+            type="submit"
+          >
+            Salvar
+          </Button>
+          <Button
+            width="100%"
+            colorScheme="red"
+            fontWeight="bold"
+            onClick={handleAbort}
+          >
+            Cancelar
+          </Button>
+        </HStack>
       </VStack>
     </VStack>
   );

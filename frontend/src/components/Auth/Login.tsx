@@ -2,7 +2,6 @@ import {
   Text,
   Input,
   VStack,
-  Divider,
   Button,
   Icon,
   InputGroup,
@@ -18,6 +17,7 @@ import {
 import { MdVisibility } from "react-icons/md";
 import { FormEvent, useState } from "react";
 import { useUser } from "../../hooks/useUser";
+import { motion } from "framer-motion";
 
 export function Login() {
   const { handleSignInUser } = useUser();
@@ -33,7 +33,13 @@ export function Login() {
   }
 
   return (
-    <VStack w="full">
+    <VStack
+      w="full"
+      as={motion.div}
+      initial={{ opacity: 0, x: 50, y: -50 }}
+      whileInView={{ opacity: 1, x: 0, y: 0 }}
+      viewport={{ once: true }}
+    >
       <VStack w="full" gap={2}>
         <Button w="full" disabled={true} h={12} gap={4}>
           <Icon as={AiOutlineGoogle} />{" "}
@@ -45,7 +51,6 @@ export function Login() {
         </Button>
       </VStack>
       <Text>ou</Text>
-      <Divider orientation="horizontal" />
       <VStack
         as="form"
         onSubmit={(event) => handleAuthenticated(event)}
@@ -87,8 +92,13 @@ export function Login() {
           type="submit"
           variant="solid"
           colorScheme="teal"
+          bgColor="teal"
           w="full"
           h={12}
+          as={motion.button}
+          initial={{ opacity: 0, y: 5 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
         >
           Login
         </Button>

@@ -1,5 +1,7 @@
 import { Box, Text } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false,
@@ -40,6 +42,7 @@ const series = [
 ];
 
 function Graph() {
+  const router = useRouter();
   return (
     <Box
       w="full"
@@ -47,7 +50,6 @@ function Graph() {
       borderRadius={5}
       bg="gray.800"
       p={5}
-      maxH={200}
       overflowY="auto"
       css={{
         "&::-webkit-scrollbar": {
@@ -62,7 +64,13 @@ function Graph() {
         },
       }}
     >
-      <Text color="teal">Gráfico de progresso</Text>
+      {router.pathname == "/Graph" ? (
+        <Text color="teal">Gráfico de progresso</Text>
+      ) : (
+        <Link passHref href="/Graph">
+          <Text color="teal">Gráfico de progresso</Text>
+        </Link>
+      )}
       <Chart options={options} series={series} type="area" />
     </Box>
   );

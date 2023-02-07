@@ -6,15 +6,17 @@ import { UsersProvider } from "../contexts/usersContext";
 import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
+import "react-calendar/dist/Calendar.css";
+import "../styles/calendar.css"
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <ChakraProvider theme={theme}>
       <NextNProgress
-        color="#7817f7"
+        color="#2500f8"
         startPosition={0.3}
         stopDelayMs={200}
-        height={10}
+        height={5}
         showOnShallow
       />
       <ToastContainer />

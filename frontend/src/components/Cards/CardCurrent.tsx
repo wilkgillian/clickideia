@@ -12,7 +12,7 @@ function CardCurrent({ cardContent }: CardCurrentProps) {
       borderRadius={5}
       bg="gray.800"
       p={5}
-      maxH={150}
+      maxH={250}
       overflowY="auto"
       css={{
         '&::-webkit-scrollbar': {

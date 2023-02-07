@@ -36,6 +36,7 @@ export default function UserModal({ title, username }: UserModalProps) {
     },
   ];
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <IoIosArrowDown

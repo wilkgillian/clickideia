@@ -1,11 +1,10 @@
 import Head from "next/head";
-import { Box, Text, Divider, VStack, SlideFade } from "@chakra-ui/react";
+import { Box, Text, Divider, VStack } from "@chakra-ui/react";
 import { Login } from "../components/Auth/Login";
 import LoginAnimation from "../components/Animations/Login";
 import { useEffect, useState } from "react";
 import { Register } from "../components/Auth/Register";
 import { useUser } from "../hooks/useUser";
-import Aos from "aos";
 
 export default function Home() {
   const [isUser, setIsUser] = useState(false);
@@ -15,9 +14,6 @@ export default function Home() {
   }
   useEffect(() => {
     loadUser();
-    // Aos.init({
-    //   duration: 1000,
-    // });
   }, []);
   return (
     <Box as="div" w="100%" maxW="1920px" h="100vh" margin="auto">
@@ -36,14 +32,14 @@ export default function Home() {
           <LoginAnimation />
         </Box>
         <Divider orientation="vertical" />
-        <VStack w="full" h="full" padding="1.2rem 4rem">
-          <Box w="100%">
+        <VStack w="full" h="full" justifyContent="center" padding="1.2rem 4rem">
+          <Box w="70%">
             <Text as="h2" fontSize={24}>
               Bem vindo ao{" "}
             </Text>
             <Text
               as="h1"
-              fontSize={36}
+              fontSize={42}
               fontWeight="bold"
               lineHeight={0.5}
               color="teal"
@@ -53,7 +49,7 @@ export default function Home() {
             </Text>
           </Box>
           {isUser ? (
-            <>
+            <VStack w="70%" alignItems="center">
               <Register />
               <Text>
                 Já tem conta?{" "}
@@ -61,9 +57,9 @@ export default function Home() {
                   Faça login
                 </Text>
               </Text>
-            </>
+            </VStack>
           ) : (
-            <>
+            <VStack w="70%" alignItems="center">
               <Login />
               <Text>
                 Não tem conta?{" "}
@@ -71,7 +67,7 @@ export default function Home() {
                   Cadastre-se
                 </Text>
               </Text>
-            </>
+            </VStack>
           )}
         </VStack>
       </Box>

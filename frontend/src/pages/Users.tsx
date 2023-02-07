@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
-import { useTasks } from "../hooks/useTasks";
 import { Box } from "@chakra-ui/react";
 import { TasksProvider } from "../contexts/tasksContext";
 import { useUser } from "../hooks/useUser";

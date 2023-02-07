@@ -28,14 +28,16 @@ export function Register() {
     }
   }
   return (
-    <>
-      <VStack as={motion.div} w="full" gap={2} transition={"0.5s linear"}>
-        <InputGroup
-          as={motion.div}
-          initial={{ opacity: 0, x: 100 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-        >
+    <VStack w="full" h="full" justifyContent="center" alignItems="center">
+      <VStack
+        w="full"
+        gap={2}
+        as={motion.div}
+        initial={{ opacity: 0, x: 50, y: -50 }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
+        viewport={{ once: true }}
+      >
+        <InputGroup>
           <InputLeftElement
             pointerEvents="none"
             // eslint-disable-next-line react/no-children-prop
@@ -74,13 +76,18 @@ export function Register() {
           type="submit"
           variant="solid"
           colorScheme="teal"
+          bgColor="teal"
           w="full"
           h={12}
+          as={motion.button}
+          initial={{ opacity: 0, y: 5 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           onClick={(event) => handleAuthenticated(event)}
         >
           Cadastrar
         </Button>
       </VStack>
-    </>
+    </VStack>
   );
 }

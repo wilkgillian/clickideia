@@ -5,6 +5,7 @@ import { IoHandLeftOutline } from "react-icons/io5";
 import { GiConfirmed } from "react-icons/gi";
 import { useTasks } from "../../hooks/useTasks";
 import ModalTask from "../ModalTask";
+import { motion } from "framer-motion";
 
 interface CardTasksProps {
   title: string;
@@ -48,7 +49,13 @@ export function CardTasks({ title, id }: CardTasksProps) {
     },
   ];
   return (
-    <HStack w="full">
+    <HStack
+      w="full"
+      as={motion.div}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true }}
+    >
       <HStack
         w="full"
         borderRadius={5}
@@ -91,22 +98,8 @@ export function CardTasks({ title, id }: CardTasksProps) {
           ))}
         </HStack>
       </HStack>
-      <Tooltip
-        label="Editar"
-        aria-label="Editar"
-        display="flex"
-        alignItems="center"
-      >
-        <ModalTask type="Editar" id={id} />
-      </Tooltip>
-      <Tooltip
-        label="Deletar"
-        aria-label="Deletar"
-        display="flex"
-        alignItems="center"
-      >
-        <ModalTask type="Deletar" id={id} />
-      </Tooltip>
+      <ModalTask type="Editar" id={id} />
+      <ModalTask type="Deletar" id={id} />
     </HStack>
   );
 }

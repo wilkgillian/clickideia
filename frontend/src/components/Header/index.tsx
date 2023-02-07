@@ -16,7 +16,7 @@ export default function Header() {
       p={10}
       alignItems="center"
       justifyContent={
-        router.pathname == "/Users" ? "flex-end" : "space-between"
+        router.pathname != "/Homepage" ? "flex-end" : "space-between"
       }
     >
       {router.pathname == "/Homepage" ? <ModalTask type="Criar" /> : ""}

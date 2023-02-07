@@ -49,7 +49,8 @@ function TasksContainer() {
       </Box>
       <Box
         w="full"
-        h="50vh"
+        maxH="68.5vh"
+        h="full"
         overflowY="auto"
         css={{
           "&::-webkit-scrollbar": {
@@ -64,7 +65,7 @@ function TasksContainer() {
           },
         }}
       >
-        <Box w="full" borderRadius={10} bg="gray.800" padding={5}>
+        <Box w="full" borderRadius={10} bg="gray.800" padding={5} >
           <Text color="teal" m="0 0 1rem 0">
             Tarefas com prioridade
           </Text>
