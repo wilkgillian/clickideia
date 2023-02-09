@@ -2,6 +2,7 @@ import { Box, Flex, HStack, Icon, Text } from "@chakra-ui/react";
 import { AiOutlineCalendar, AiOutlineClockCircle } from "react-icons/ai";
 import ModalTask from "../ModalTask";
 import { formatDateAndHour } from "../utils/formatDateAndHour";
+import { useRouter } from "next/router";
 
 interface TaskProps {
   id: string;
@@ -11,14 +12,19 @@ interface TaskProps {
 
 function CardCurrentTask({ id, title, created_at }: TaskProps) {
   const infos = formatDateAndHour(created_at ? created_at : null);
+  const { pathname } = useRouter();
 
   return (
     <Box w="full" bg="gray.800" p={5} borderRadius={10}>
       <HStack justifyContent="space-between">
-        <Text color="teal">Próxima tarefa</Text>
+        {pathname != "/Tasks" && <Text color="teal">Próxima tarefa</Text>}
+        <Flex gap={4}>
+
         <ModalTask id={id} type="Editar" />
+        {pathname == "/Tasks" && <ModalTask id={id} type="Deletar" />}
+        </Flex>
       </HStack>
-      <Text fontWeight="bold" color="red.500">
+      <Text fontWeight="bold" textTransform="capitalize" color="teal.100">
         {title}
       </Text>
       <HStack

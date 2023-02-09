@@ -1,4 +1,4 @@
-import { VStack, HStack, Box, Text, Spinner } from "@chakra-ui/react";
+import { VStack, HStack, Box, Text } from "@chakra-ui/react";
 import CardsStatus from "../Cards/CardsStatus";
 import { CardTasks } from "../Cards/CardsTasks";
 import { useTasks } from "../../hooks/useTasks";
@@ -29,7 +29,6 @@ function TasksContainer() {
       amount: completed,
     },
   ];
-
   return (
     <VStack w="70%" gap={4}>
       <Box w="full" borderRadius={10} bg="gray.800" padding={5}>
@@ -65,7 +64,7 @@ function TasksContainer() {
           },
         }}
       >
-        <Box w="full" borderRadius={10} bg="gray.800" padding={5} >
+        <Box w="full" borderRadius={10} bg="gray.800" padding={5}>
           <Text color="teal" m="0 0 1rem 0">
             Tarefas com prioridade
           </Text>

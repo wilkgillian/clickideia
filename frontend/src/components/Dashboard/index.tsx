@@ -8,7 +8,7 @@ export default function Dashboard() {
   const { tasks, loadTasks } = useTasks();
   useEffect(() => {
     loadTasks();
-  }, []);
+  });
   return (
     <Box display="flex" w="full" p="0 2.4rem" gap={4}>
       {tasks ? (

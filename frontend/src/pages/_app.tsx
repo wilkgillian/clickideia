@@ -7,7 +7,7 @@ import { ToastContainer } from "react-toastify";
 
 import "react-toastify/dist/ReactToastify.css";
 import "react-calendar/dist/Calendar.css";
-import "../styles/calendar.css"
+import "../styles/calendar.css";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -21,9 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
       />
       <ToastContainer />
       <UsersProvider>
-        {/* <TasksProvider> */}
         <Component {...pageProps} />
-        {/* </TasksProvider> */}
       </UsersProvider>
     </ChakraProvider>
   );
